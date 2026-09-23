@@ -1,0 +1,25 @@
+# Step 4 - React: Vite app + a small Express server
+
+Links written BASE/<path> are files in this repo. BASE is the one my prompt gave; if it gave none, BASE is where you got this file: the URL up to and including the branch name, or the local repo folder.
+
+Fetch both RAW first and follow them - the shared rules and the cache:
+BASE/prompts/library/build/common.md
+BASE/prompts/library/build/cache.md
+Already fetched one of these earlier in this chat? Do not fetch it again.
+
+The token must never reach the browser, so React never calls Taggbox
+itself. Deliver:
+- server.js - Node.js 18+ with Express. GET /api/posts calls Taggbox
+  with the cache (cache.md) and returns { posts, paging } as JSON; an
+  empty ACCESS_TOKEN returns the sample posts. In production it also
+  serves the built app from dist/.
+- package.json - react, react-dom, express, vite,
+  @vitejs/plugin-react; scripts: "dev" (Vite + server together, Vite
+  proxying /api to the server), "build", "start".
+- vite.config.js, index.html, src/main.jsx.
+- src/SocialWidget.jsx - one drop-in component: fetches /api/posts,
+  renders the same markup (same .tbx-* classes) as preview.html, with
+  a loading state, an empty state and an error message. React escapes
+  text itself - never use dangerouslySetInnerHTML; allow only
+  http/https links.
+- src/social-widget.css - the CSS from preview.html, unchanged.
