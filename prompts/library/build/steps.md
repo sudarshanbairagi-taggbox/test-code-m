@@ -18,36 +18,38 @@ showing them to me - same content, same paths.
 
 ## Step 1 - pick a theme (fetch nothing)
 
-Show me this table as it is, then one line with the theme gallery -
-every theme's picture, click one to see its preview:
-<host>/guides/theme-gallery.html, where <host> is BASE with
-"https://raw.githubusercontent.com/" swapped for
+Show me this table, with every BASE written out as the full URL so the
+Thumbnail column shows each theme's picture. If this chat cannot show
+images, write each thumbnail as a link instead: [bigThumb<id>.png](<url>).
+After the table, one line with the theme gallery - every picture large,
+click one to see its preview: <host>/guides/theme-gallery.html, where
+<host> is BASE with "https://raw.githubusercontent.com/" swapped for
 "https://raw.githack.com/" (raw GitHub would show the page as code; if
 BASE is a local folder, give the file path). Then ask which one I
 want - "skip", or any reply that is not a number or name, means
 3. Modern Card.
 
-| # | Theme | For | What it looks like |
-|---|---|---|---|
-| 1 | Classic Card | social | cards: author on top, text, image at the bottom |
-| 2 | Social Card | social | cards: image on top, author, then text |
-| 3 | Modern Card | social | cards: image on top, text, author at the bottom |
-| 4 | Classic Photo | social | 16:9 photo cards with only the author row under them |
-| 5 | Square Photo | social | a grid of square photos, nothing else |
-| 6 | Collage | social | one big photo beside two small stacked ones |
-| 7 | Vivid | social | mosaic of cards with pastel gradient text panels |
-| 8 | Horizontal Slider | social | one row of photos, arrows on the ends |
-| 9 | Horizontal Columns | social | a slider of cards, avatar on the photo edge, centred text |
-| 10 | Slider | social | a slider of square rounded photos |
-| 11 | Reels | social | a row of tall 9:16 reel tiles |
-| 12 | Story Theme | social | tall story cards, the middle one in focus |
-| 13 | Single Post | social | one big photo at a time, arrows on its sides |
-| 14 | Widget Theme | social | one post centred: author, wide photo, text |
-| 15 | Review Box | reviews | a grid of review cards, stars on top |
-| 16 | Review Carousel | reviews | one row of review cards, arrows on the ends |
-| 17 | Review List | reviews | full-width review rows stacked down the page |
-| 18 | Rating Badge | reviews | a small badge: logo, average score, stars, count |
-| 19 | Badge | reviews | a wide badge: network logos, score and stars in one line |
+| # | Theme | For | What it looks like | Thumbnail |
+|---|---|---|---|---|
+| 1 | Classic Card | social | cards: author on top, text, image at the bottom | ![Classic Card](BASE/guides/themes/small/bigThumb5.jpg) |
+| 2 | Social Card | social | cards: image on top, author, then text | ![Social Card](BASE/guides/themes/small/bigThumb19.jpg) |
+| 3 | Modern Card | social | cards: image on top, text, author at the bottom | ![Modern Card](BASE/guides/themes/small/bigThumb20.jpg) |
+| 4 | Classic Photo | social | 16:9 photo cards with only the author row under them | ![Classic Photo](BASE/guides/themes/small/bigThumb3.jpg) |
+| 5 | Square Photo | social | a grid of square photos, nothing else | ![Square Photo](BASE/guides/themes/small/bigThumb4.jpg) |
+| 6 | Collage | social | one big photo beside two small stacked ones | ![Collage](BASE/guides/themes/small/bigThumb50.jpg) |
+| 7 | Vivid | social | mosaic of cards with pastel gradient text panels | ![Vivid](BASE/guides/themes/small/bigThumb83.jpg) |
+| 8 | Horizontal Slider | social | one row of photos, arrows on the ends | ![Horizontal Slider](BASE/guides/themes/small/bigThumb16.jpg) |
+| 9 | Horizontal Columns | social | a slider of cards, avatar on the photo edge, centred text | ![Horizontal Columns](BASE/guides/themes/small/bigThumb47.jpg) |
+| 10 | Slider | social | a slider of square rounded photos | ![Slider](BASE/guides/themes/small/bigThumb81.jpg) |
+| 11 | Reels | social | a row of tall 9:16 reel tiles | ![Reels](BASE/guides/themes/small/bigThumb61.jpg) |
+| 12 | Story Theme | social | tall story cards, the middle one in focus | ![Story Theme](BASE/guides/themes/small/bigThumb60.jpg) |
+| 13 | Single Post | social | one big photo at a time, arrows on its sides | ![Single Post](BASE/guides/themes/small/bigThumb52.jpg) |
+| 14 | Widget Theme | social | one post centred: author, wide photo, text | ![Widget Theme](BASE/guides/themes/small/bigThumb49.jpg) |
+| 15 | Review Box | reviews | a grid of review cards, stars on top | ![Review Box](BASE/guides/themes/small/bigThumb79.jpg) |
+| 16 | Review Carousel | reviews | one row of review cards, arrows on the ends | ![Review Carousel](BASE/guides/themes/small/bigThumb80.jpg) |
+| 17 | Review List | reviews | full-width review rows stacked down the page | ![Review List](BASE/guides/themes/small/bigThumb85.jpg) |
+| 18 | Rating Badge | reviews | a small badge: logo, average score, stars, count | ![Rating Badge](BASE/guides/themes/small/bigThumb82.jpg) |
+| 19 | Badge | reviews | a wide badge: network logos, score and stars in one line | ![Badge](BASE/guides/themes/small/bigThumb84.jpg) |
 
 Then stop.
 
