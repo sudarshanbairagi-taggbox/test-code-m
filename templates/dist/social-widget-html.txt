@@ -7,7 +7,7 @@
 ACCESS_TOKEN=
 # Always this value - nothing to copy from the dashboard.
 API_BASE_URL=https://api.taggbox.com/api
-# Theme file name from the themes/ folder, e.g. modern-card, vivid, review-list.
+# Theme file name from the themes/ folder, e.g. modern-card, vivid, review-list, badge.
 WIDGET_THEME=modern-card
 
 ===== FILE: .htaccess =====
@@ -29,7 +29,7 @@ Shows the live posts from your Taggbox gallery, in the theme you picked. Until y
 | `index.html` | The page: loads the theme and posts from `posts.php` and draws the cards. No framework, no build step. |
 | `posts.php` | The only server file and the only place the token lives: calls Taggbox with the cache, returns JSON. |
 | `.htaccess` | Keeps `.env` and `cache/` private on Apache hosts. |
-| `themes/` | All 16 themes (`.css` is the look, `.json` is how a card is laid out). |
+| `themes/` | All 19 themes (`.css` is the look, `.json` is how a card is laid out). |
 | `samples/` | The sample posts shown while `ACCESS_TOKEN` is empty. |
 | `.env.example` | The settings - copy it to `.env`. |
 
@@ -57,7 +57,7 @@ Copy `.env.example` to a new file named `.env` in the same folder and fill it in
 |---|---|
 | `ACCESS_TOKEN` | Your gallery's token: Taggbox dashboard, the gallery's card, three-dot menu, **Access Token**. Leave it empty to see the sample posts. |
 | `API_BASE_URL` | Always `https://api.taggbox.com/api` - nothing to copy. |
-| `WIDGET_THEME` | The theme, by file name in `themes/`: `modern-card`, `classic-card`, `social-card`, `square-photo`, `classic-photo`, `collage`, `horizontal-columns`, `horizontal-slider`, `gallery-slider`, `highlight-slider`, `reels`, `vivid`, `widget-theme`, `review-carousel`, `review-list`, `review-box`. |
+| `WIDGET_THEME` | The theme, by file name in `themes/`: `classic-card`, `social-card`, `modern-card`, `classic-photo`, `square-photo`, `collage`, `vivid`, `horizontal-slider`, `horizontal-columns`, `slider`, `reels`, `story-theme`, `single-post`, `widget-theme`, `review-box`, `review-carousel`, `review-list`, `rating-badge`, `badge`. |
 
 The token stays on the server. It never appears in the page, in View Source or in the browser.
 
@@ -125,6 +125,12 @@ Posts are saved in `cache/posts.json` for 5 minutes (`CACHE_TTL_SECONDS` in `pos
     return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC' });
   }
   
+  // Photo-only themes skip posts without an image - they would be empty cards.
+  function visiblePosts(posts, parts) {
+    if (parts.join() !== 'media') return posts;
+    return posts.filter((p) => Array.isArray(p.media) && p.media.some((m) => m && m.type === 'image' && safeUrl(m.cdn_url)));
+  }
+  
   function renderCard(post, parts) {
     const author = post.author || {};
     const network = post.network || {};
@@ -168,17 +174,40 @@ Posts are saved in `cache/posts.json` for 5 minutes (`CACHE_TTL_SECONDS` in `pos
     const href = safeUrl(post.source && post.source.permalink) || '#';
     return `    <a class="${cls}" href="${esc(href)}" target="_blank" rel="noopener noreferrer">\n      ${inner}\n    </a>`;
   }
+  
+  // Rating Badge / Badge: the average of every rated post, its stars and the count.
+  function renderBadge(posts) {
+    const rated = posts.filter((p) => typeof p.rating === 'number' && p.rating >= 1 && p.rating <= 5);
+    const nets = [];
+    rated.forEach((p) => {
+      const n = p.network || {};
+      if (n.slug && !nets.some((x) => x.slug === n.slug)) nets.push({ slug: n.slug, name: n.name || '' });
+    });
+    const avg = rated.length ? rated.reduce((sum, p) => sum + p.rating, 0) / rated.length : 0;
+    const title = nets.length === 1 ? `${nets[0].name} Reviews` : 'Customer Reviews';
+    const full = Math.floor(avg + 0.5);
+    const marks = nets.map((n) => `<span class="tbx-net" data-net="${esc(n.slug)}" data-mark="${esc(NET_MARK[n.slug] || n.name.slice(0, 1))}" `
+      + `title="${esc(n.name)}"></span>`).join('');
+    return '  <div class="tbx-badge">\n'
+      + `    <div class="tbx-badge-nets">${marks}</div>\n`
+      + `    <div class="tbx-badge-title">${esc(title)}</div>\n`
+      + `    <div class="tbx-badge-score"><span class="tbx-badge-avg">${avg.toFixed(1)}</span>`
+      + `<span class="tbx-stars" aria-label="${avg.toFixed(1)} out of 5">${'★'.repeat(full)}${'☆'.repeat(5 - full)}</span></div>\n`
+      + `    <div class="tbx-badge-count">Based on ${rated.length} review${rated.length === 1 ? '' : 's'}</div>\n`
+      + '  </div>';
+  }
 
   var root = document.getElementById('social-widget');
 
   function show(data) {
     var meta = data.theme;
-    var posts = data.posts || [];
+    var posts = visiblePosts(data.posts || [], meta.parts);
     root.className = 'tbx-widget tbx-t-' + meta.slug + ' tbx-l-' + meta.layout + (meta.clamp ? ' tbx-clamp' : '');
     var note = data.sample ? '<p class="tbx-note">Sample posts - set ACCESS_TOKEN in .env to show your gallery.</p>' : '';
     var track = posts.length
       ? '<div class="tbx-track">' + posts.map(function (p) { return renderCard(p, meta.parts); }).join('\n') + '</div>'
       : '<p class="tbx-empty">No posts to show yet.</p>';
+    if (meta.layout === 'badge' && posts.length) track = renderBadge(posts);
     if (meta.layout === 'slider' && posts.length) {
       track = '<div class="tbx-slider"><button class="tbx-arrow tbx-arrow--prev" type="button" data-dir="-1" aria-label="Previous">‹</button>'
         + track + '<button class="tbx-arrow tbx-arrow--next" type="button" data-dir="1" aria-label="Next">›</button></div>';

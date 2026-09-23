@@ -132,6 +132,12 @@ function shortDate(iso) {
   return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC' });
 }
 
+// Photo-only themes skip posts without an image - they would be empty cards.
+function visiblePosts(posts, parts) {
+  if (parts.join() !== 'media') return posts;
+  return posts.filter((p) => Array.isArray(p.media) && p.media.some((m) => m && m.type === 'image' && safeUrl(m.cdn_url)));
+}
+
 function renderCard(post, parts) {
   const author = post.author || {};
   const network = post.network || {};
@@ -176,11 +182,34 @@ function renderCard(post, parts) {
   return `    <a class="${cls}" href="${esc(href)}" target="_blank" rel="noopener noreferrer">\n      ${inner}\n    </a>`;
 }
 
+// Rating Badge / Badge: the average of every rated post, its stars and the count.
+function renderBadge(posts) {
+  const rated = posts.filter((p) => typeof p.rating === 'number' && p.rating >= 1 && p.rating <= 5);
+  const nets = [];
+  rated.forEach((p) => {
+    const n = p.network || {};
+    if (n.slug && !nets.some((x) => x.slug === n.slug)) nets.push({ slug: n.slug, name: n.name || '' });
+  });
+  const avg = rated.length ? rated.reduce((sum, p) => sum + p.rating, 0) / rated.length : 0;
+  const title = nets.length === 1 ? `${nets[0].name} Reviews` : 'Customer Reviews';
+  const full = Math.floor(avg + 0.5);
+  const marks = nets.map((n) => `<span class="tbx-net" data-net="${esc(n.slug)}" data-mark="${esc(NET_MARK[n.slug] || n.name.slice(0, 1))}" `
+    + `title="${esc(n.name)}"></span>`).join('');
+  return '  <div class="tbx-badge">\n'
+    + `    <div class="tbx-badge-nets">${marks}</div>\n`
+    + `    <div class="tbx-badge-title">${esc(title)}</div>\n`
+    + `    <div class="tbx-badge-score"><span class="tbx-badge-avg">${avg.toFixed(1)}</span>`
+    + `<span class="tbx-stars" aria-label="${avg.toFixed(1)} out of 5">${'★'.repeat(full)}${'☆'.repeat(5 - full)}</span></div>\n`
+    + `    <div class="tbx-badge-count">Based on ${rated.length} review${rated.length === 1 ? '' : 's'}</div>\n`
+    + '  </div>';
+}
+
 function renderPage(data) {
   const { meta, css } = theme;
-  const posts = data.posts || [];
+  const posts = visiblePosts(data.posts || [], meta.parts);
   const cards = posts.map((p) => renderCard(p, meta.parts)).join('\n');
-  const track = posts.length ? `  <div class="tbx-track">\n${cards}\n  </div>` : '  <p class="tbx-empty">No posts to show yet.</p>';
+  let track = posts.length ? `  <div class="tbx-track">\n${cards}\n  </div>` : '  <p class="tbx-empty">No posts to show yet.</p>';
+  if (meta.layout === 'badge' && posts.length) track = renderBadge(posts);
   const slider = meta.layout === 'slider' && posts.length;
   const body = slider
     ? `  <div class="tbx-slider">\n  <button class="tbx-arrow tbx-arrow--prev" type="button" data-dir="-1" aria-label="Previous">‹</button>\n${track}\n`

@@ -1,11 +1,12 @@
 {
-  "name": "Gallery Slider",
-  "slug": "gallery-slider",
+  "name": "Story Theme",
+  "slug": "story-theme",
   "type": "social",
   "layout": "slider",
   "parts": [
-    "media"
+    "media",
+    "head"
   ],
-  "clamp": true,
+  "clamp": false,
   "font_url": "https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap"
 }

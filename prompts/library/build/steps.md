@@ -18,28 +18,43 @@ showing them to me - same content, same paths.
 
 ## Step 1 - pick a theme (fetch nothing)
 
-Ask me which theme I want, with this list, and say that "skip" (or
-any reply that is not a number or name) uses 1. Modern Card:
+Show me this table as it is, then one line with the theme gallery -
+every theme's picture, click one to see its preview:
+<host>/guides/theme-gallery.html, where <host> is BASE with
+"https://raw.githubusercontent.com/" swapped for
+"https://raw.githack.com/" (raw GitHub would show the page as code; if
+BASE is a local folder, give the file path). Then ask which one I
+want - "skip", or any reply that is not a number or name, means
+3. Modern Card.
 
-Social feeds
-1. Modern Card (default)   2. Classic Card   3. Social Card
-4. Square Photo            5. Classic Photo  6. Collage
-7. Horizontal Columns      8. Horizontal Slider
-9. Gallery Slider          10. Highlight Slider
-11. Reels                  12. Vivid         13. Widget Theme
-Reviews
-14. Review Carousel        15. Review List   16. Review Box
+| # | Theme | For | What it looks like |
+|---|---|---|---|
+| 1 | Classic Card | social | cards: author on top, text, image at the bottom |
+| 2 | Social Card | social | cards: image on top, author, then text |
+| 3 | Modern Card | social | cards: image on top, text, author at the bottom |
+| 4 | Classic Photo | social | 16:9 photo cards with only the author row under them |
+| 5 | Square Photo | social | a grid of square photos, nothing else |
+| 6 | Collage | social | one big photo beside two small stacked ones |
+| 7 | Vivid | social | mosaic of cards with pastel gradient text panels |
+| 8 | Horizontal Slider | social | one row of photos, arrows on the ends |
+| 9 | Horizontal Columns | social | a slider of cards, avatar on the photo edge, centred text |
+| 10 | Slider | social | a slider of square rounded photos |
+| 11 | Reels | social | a row of tall 9:16 reel tiles |
+| 12 | Story Theme | social | tall story cards, the middle one in focus |
+| 13 | Single Post | social | one big photo at a time, arrows on its sides |
+| 14 | Widget Theme | social | one post centred: author, wide photo, text |
+| 15 | Review Box | reviews | a grid of review cards, stars on top |
+| 16 | Review Carousel | reviews | one row of review cards, arrows on the ends |
+| 17 | Review List | reviews | full-width review rows stacked down the page |
+| 18 | Rating Badge | reviews | a small badge: logo, average score, stars, count |
+| 19 | Badge | reviews | a wide badge: network logos, score and stars in one line |
 
 Then stop.
 
 ## Step 2 - the preview (fetch ONE file, write no code)
 
 Each theme's preview is a finished file. Its name (the "slug") is the
-theme name in lower case with dashes: 1 modern-card, 2 classic-card,
-3 social-card, 4 square-photo, 5 classic-photo, 6 collage,
-7 horizontal-columns, 8 horizontal-slider, 9 gallery-slider,
-10 highlight-slider, 11 reels, 12 vivid, 13 widget-theme,
-14 review-carousel, 15 review-list, 16 review-box.
+theme name in lower case with dashes: 1 classic-card, 2 social-card, 3 modern-card, 4 classic-photo, 5 square-photo, 6 collage, 7 vivid, 8 horizontal-slider, 9 horizontal-columns, 10 slider, 11 reels, 12 story-theme, 13 single-post, 14 widget-theme, 15 review-box, 16 review-carousel, 17 review-list, 18 rating-badge, 19 badge.
 
 Fetch RAW BASE/guides/previews/<slug>.html and give it back to me as
 preview.html, exactly as it is, character for character - same CSS,
@@ -102,7 +117,7 @@ character. Do not rewrite, shorten, "improve" or merge any of them, and
 write no "rest stays the same". The files, in this order:
 - every file from the stack text file, except .env.example and
   except the sample file I do not need: samples/social.json for a
-  social theme, samples/reviews.json for a review theme (14-16) - give
+  social theme, samples/reviews.json for a review theme (15-19) - give
   only that one;
 - themes/<slug>.css and themes/<slug>.json (keep the themes/ folder);
 - custom.css, only if step 3 made one - the final version, with every

@@ -75,6 +75,33 @@ function Card({ post, parts }) {
   );
 }
 
+// Rating Badge / Badge: the average of every rated post, its stars and the count.
+function Badge({ posts }) {
+  const rated = posts.filter((p) => typeof p.rating === 'number' && p.rating >= 1 && p.rating <= 5);
+  const nets = [];
+  rated.forEach((p) => {
+    const n = p.network || {};
+    if (n.slug && !nets.some((x) => x.slug === n.slug)) nets.push({ slug: n.slug, name: n.name || '' });
+  });
+  const avg = rated.length ? rated.reduce((sum, p) => sum + p.rating, 0) / rated.length : 0;
+  const full = Math.floor(avg + 0.5);
+  return (
+    <div className="tbx-badge">
+      <div className="tbx-badge-nets">
+        {nets.map((n) => (
+          <span className="tbx-net" data-net={n.slug} data-mark={NET_MARK[n.slug] || n.name.slice(0, 1)} title={n.name} key={n.slug} />
+        ))}
+      </div>
+      <div className="tbx-badge-title">{nets.length === 1 ? `${nets[0].name} Reviews` : 'Customer Reviews'}</div>
+      <div className="tbx-badge-score">
+        <span className="tbx-badge-avg">{avg.toFixed(1)}</span>
+        <span className="tbx-stars" aria-label={`${avg.toFixed(1)} out of 5`}>{'★'.repeat(full) + '☆'.repeat(5 - full)}</span>
+      </div>
+      <div className="tbx-badge-count">Based on {rated.length} review{rated.length === 1 ? '' : 's'}</div>
+    </div>
+  );
+}
+
 export default function SocialWidget() {
   const [state, setState] = useState({ loading: true });
   const trackRef = useRef(null);
@@ -91,13 +118,18 @@ export default function SocialWidget() {
   if (state.loading) return <section className="tbx-widget"><p className="tbx-empty">Loading posts…</p></section>;
   if (state.error) return <section className="tbx-widget"><p className="tbx-empty">Could not load posts right now.</p></section>;
 
-  const { posts, theme, sample } = state.data;
+  const { theme, sample } = state.data;
+  // Photo-only themes skip posts without an image - they would be empty cards.
+  const posts = theme.parts.join() !== 'media' ? state.data.posts : state.data.posts.filter(
+    (p) => Array.isArray(p.media) && p.media.some((m) => m && m.type === 'image' && safeUrl(m.cdn_url)));
   const slider = theme.layout === 'slider' && posts.length > 0;
   const scroll = (dir) => {
     const t = trackRef.current;
     if (t) t.scrollBy({ left: dir * t.clientWidth, behavior: 'smooth' });
   };
-  const track = posts.length
+  const track = posts.length && theme.layout === 'badge'
+    ? <Badge posts={posts} />
+    : posts.length
     ? (
       <div className="tbx-track" ref={trackRef}>
         {posts.map((post, i) => <Card post={post} parts={theme.parts} key={post.id || i} />)}

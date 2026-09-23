@@ -32,23 +32,91 @@ POSTS_PER_PREVIEW = 6
 # Layouts: grid, list, masonry, collage, slider. Parts: media, head, stars, text.
 # Taken from the Taggbox theme thumbnails (bigThumb<themeId>.png).
 THEMES = {
-    "Modern Card":        ("modern-card",        "grid",    ["media", "text", "head"]),
     "Classic Card":       ("classic-card",       "grid",    ["head", "text", "media"]),
     "Social Card":        ("social-card",        "grid",    ["media", "head", "text"]),
-    "Square Photo":       ("square-photo",       "grid",    ["media"]),
+    "Modern Card":        ("modern-card",        "grid",    ["media", "text", "head"]),
     "Classic Photo":      ("classic-photo",      "grid",    ["media", "head"]),
+    "Square Photo":       ("square-photo",       "grid",    ["media"]),
     "Collage":            ("collage",            "collage", ["media", "text"]),
-    "Horizontal Columns": ("horizontal-columns", "slider",  ["media", "head", "text"]),
-    "Horizontal Slider":  ("horizontal-slider",  "slider",  ["media"]),
-    "Gallery Slider":     ("gallery-slider",     "slider",  ["media"]),
-    "Highlight Slider":   ("highlight-slider",   "slider",  ["media", "head"]),
-    "Reels":              ("reels",              "slider",  ["media"]),
     "Vivid":              ("vivid",              "masonry", ["media", "head", "text"]),
+    "Horizontal Slider":  ("horizontal-slider",  "slider",  ["media"]),
+    "Horizontal Columns": ("horizontal-columns", "slider",  ["media", "head", "text"]),
+    "Slider":             ("slider",             "slider",  ["media"]),
+    "Reels":              ("reels",              "slider",  ["media"]),
+    "Story Theme":        ("story-theme",        "slider",  ["media", "head"]),
+    "Single Post":        ("single-post",        "slider",  ["media"]),
     "Widget Theme":       ("widget-theme",       "list",    ["head", "media", "text"]),
+    "Review Box":         ("review-box",         "grid",    ["stars", "text", "head"]),
     "Review Carousel":    ("review-carousel",    "slider",  ["stars", "text", "head"]),
     "Review List":        ("review-list",        "list",    ["head", "stars", "text"]),
-    "Review Box":         ("review-box",         "grid",    ["stars", "text", "head"]),
+    "Rating Badge":       ("rating-badge",       "badge",   []),
+    "Badge":              ("badge",              "badge",   []),
 }
+
+# Step 1's theme list: number = position here. (themeId, type label, what it looks like)
+GALLERY = {
+    "Classic Card": (5, "social", "cards: author on top, text, image at the bottom"),
+    "Social Card": (19, "social", "cards: image on top, author, then text"),
+    "Modern Card": (20, "social", "cards: image on top, text, author at the bottom"),
+    "Classic Photo": (3, "social", "16:9 photo cards with only the author row under them"),
+    "Square Photo": (4, "social", "a grid of square photos, nothing else"),
+    "Collage": (50, "social", "one big photo beside two small stacked ones"),
+    "Vivid": (83, "social", "mosaic of cards with pastel gradient text panels"),
+    "Horizontal Slider": (16, "social", "one row of photos, arrows on the ends"),
+    "Horizontal Columns": (47, "social", "a slider of cards, avatar on the photo edge, centred text"),
+    "Slider": (81, "social", "a slider of square rounded photos"),
+    "Reels": (61, "social", "a row of tall 9:16 reel tiles"),
+    "Story Theme": (60, "social", "tall story cards, the middle one in focus"),
+    "Single Post": (52, "social", "one big photo at a time, arrows on its sides"),
+    "Widget Theme": (49, "social", "one post centred: author, wide photo, text"),
+    "Review Box": (79, "reviews", "a grid of review cards, stars on top"),
+    "Review Carousel": (80, "reviews", "one row of review cards, arrows on the ends"),
+    "Review List": (85, "reviews", "full-width review rows stacked down the page"),
+    "Rating Badge": (82, "reviews", "a small badge: logo, average score, stars, count"),
+    "Badge": (84, "reviews", "a wide badge: network logos, score and stars in one line"),
+}
+
+GALLERY_PAGE = """<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Social Widget - themes</title>
+<style>
+  body { margin: 0; font: 15px/1.4 system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif; background: #f4f5f8; color: #1f1f1f; }
+  main { max-width: 1200px; margin: 0 auto; padding: 32px 16px; }
+  h1 { margin: 0 0 4px; text-align: center; }
+  p { margin: 0 0 24px; text-align: center; opacity: .7; }
+  .g { display: grid; gap: 16px; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
+  .t { display: flex; flex-direction: column; gap: 4px; padding: 10px; background: #fff; border-radius: 10px;
+    box-shadow: 0 1px 6px rgba(0,0,0,.08); color: inherit; text-decoration: none; }
+  .t:hover { box-shadow: 0 4px 16px rgba(0,0,0,.14); }
+  .t img { width: 100%; aspect-ratio: 971 / 701; object-fit: contain; background: #fff; border-radius: 6px; }
+  .t span { font-size: .85em; opacity: .7; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Social Widget - pick a theme</h1>
+  <p>Reply in the chat with the theme's number. Click a theme to open its preview with sample posts.</p>
+  <div class="g">
+TILES
+  </div>
+</main>
+</body>
+</html>
+"""
+
+
+def build_gallery():
+    """guides/theme-gallery.html: every theme's thumbnail with its number, for step 1."""
+    tiles = []
+    for i, (name, (tid, kind, desc)) in enumerate(GALLERY.items(), 1):
+        slug = THEMES[name][0]
+        tiles.append(f'  <a class="t" href="previews/{slug}.html"><img src="themes/bigThumb{tid}.png" alt="" loading="lazy">'
+                     f'<b>{i}. {esc(name)}</b><span>{kind} - {esc(desc)}</span></a>')
+    (ROOT / "guides/theme-gallery.html").write_text(GALLERY_PAGE.replace("TILES", "\n".join(tiles)))
+
 
 # Short brand marks for the network badge (no external icon files).
 NET_MARK = {
@@ -153,6 +221,17 @@ LAYOUT_CSS = {
     .tbx-card:nth-child(n) { grid-column: auto; grid-row: auto; }
     .tbx-card:first-child { grid-column: span 2; grid-row: span 2; } }
 """,
+    "badge": """
+  /* Badge: one summary of all reviews - logo, average score, stars, count */
+  .tbx-badge { display: flex; margin: 0 auto; background: var(--tbx-surface); border-radius: 10px;
+    box-shadow: 0 2px 14px rgba(0,0,0,.09); color: inherit; }
+  .tbx-badge-nets { display: flex; }
+  .tbx-badge-title { font-size: 1.1em; }
+  .tbx-badge-score { display: flex; align-items: center; gap: 10px; }
+  .tbx-badge-avg { font-weight: 700; line-height: 1; }
+  .tbx-badge .tbx-stars { padding: 0; font-size: 1.5em; }
+  .tbx-badge-count { font-size: .9em; opacity: .75; }
+""",
     "slider": """
   /* Slider: one row that scrolls sideways; the arrows scroll one view */
   .tbx-slider { position: relative; }
@@ -205,7 +284,7 @@ THEME_CSS = {
   .tbx-arrow { border-radius: 2px; background: rgba(0,0,0,.75); color: #fff; }
   .tbx-arrow--prev { left: 8px; } .tbx-arrow--next { right: 8px; }
 """,
-    "gallery-slider": """
+    "slider": """
   .tbx-card { background: none; }
   .tbx-media { aspect-ratio: 1 / 1; }
   /* Hover: darken the photo and show the network name */
@@ -213,13 +292,25 @@ THEME_CSS = {
     place-items: center; color: #fff; font-weight: 700; background: rgba(0,0,0,.4); opacity: 0; transition: opacity .2s; }
   .tbx-card:hover .tbx-media::before, .tbx-card:focus-visible .tbx-media::before { opacity: 1; }
 """,
-    "highlight-slider": """
-  .tbx-card { position: relative; }
-  .tbx-media { aspect-ratio: 9 / 16; }
-  /* Author row over the bottom of the image */
-  .tbx-head { position: absolute; z-index: 2; left: 0; right: 0; bottom: 0; color: #fff;
-    background: linear-gradient(transparent, rgba(0,0,0,.6)); }
+    "story-theme": """
+  .tbx-card { position: relative; background: none; border-radius: 22px; opacity: .45; transform: scale(.92);
+    transition: opacity .2s, transform .2s; }
+  /* The middle story is in focus; the others fade until hovered */
+  .tbx-card:nth-child(2), .tbx-card:hover, .tbx-card:focus-visible { opacity: 1; transform: none; }
+  .tbx-media { aspect-ratio: 9 / 15; border-radius: 22px; }
+  .tbx-head { position: absolute; z-index: 2; left: 0; right: 0; bottom: 0; flex-direction: column; gap: 4px;
+    padding-bottom: 18px; color: #fff; background: linear-gradient(transparent, rgba(0,0,0,.65)); border-radius: 0 0 22px 22px; }
+  .tbx-who { text-align: center; align-items: center; }
   .tbx-author { color: #fff; }
+  .tbx-avatar { width: 48px; height: 48px; border: 3px solid #fff; }
+""",
+    "single-post": """
+  .tbx-slider { max-width: 560px; margin: 0 auto; }
+  .tbx-card { flex-basis: 100%; border-radius: 0; background: none; }
+  .tbx-media { aspect-ratio: 1 / 1.07; }
+  .tbx-arrow { width: 48px; height: 48px; background: rgba(255,255,255,.85); }
+  .tbx-arrow--prev { left: 12px; } .tbx-arrow--next { right: 12px; }
+  @media (max-width: 900px) { .tbx-card { flex-basis: 100%; } }
 """,
     "reels": """
   .tbx-card { background: none; }
@@ -251,6 +342,20 @@ THEME_CSS = {
   .tbx-stars { padding-top: 0; }
   .tbx-text { padding-top: 8px; }
 """,
+    "rating-badge": """
+  .tbx-badge { width: 180px; flex-direction: column; text-align: center; gap: 8px; padding: 18px 14px; }
+  .tbx-badge-nets .tbx-net:not(:first-child) { display: none; }
+  .tbx-badge-nets .tbx-net { width: 34px; height: 34px; font-size: 15px; }
+  .tbx-badge-score { flex-direction: column; gap: 6px; }
+  .tbx-badge-avg { font-size: 2.4em; }
+""",
+    "badge": """
+  .tbx-badge { width: 320px; flex-direction: column; align-items: flex-start; gap: 10px; padding: 20px 24px; }
+  .tbx-badge-title { display: none; }
+  .tbx-badge-nets .tbx-net { margin-right: -6px; border: 2px solid #fff; }
+  .tbx-badge-avg { font-size: 2.1em; }
+  .tbx-badge-count { text-decoration: underline; }
+""",
     "review-box": """
   .tbx-track { max-width: 760px; margin: 0 auto; }
   .tbx-card { box-shadow: 0 2px 12px rgba(0,0,0,.07); }
@@ -261,7 +366,7 @@ THEME_CSS = {
 
 # Columns (or cards per view) per theme when the theme's numberOfColumn is 0
 # or more than 4 - the thumbnails all show 3, or 2 for Review Box.
-DEFAULT_COLS = {"review-box": 2, "widget-theme": 1, "review-list": 1}
+DEFAULT_COLS = {"review-box": 2, "widget-theme": 1, "review-list": 1, "single-post": 1}
 
 
 def esc(value):
@@ -279,6 +384,13 @@ def first_image(post):
         if m.get("type") == "image" and m.get("cdn_url", "").startswith(("http://", "https://")):
             return m
     return None
+
+
+def visible(posts, parts):
+    """Photo-only themes skip posts without an image - they would be empty cards."""
+    if parts != ["media"]:
+        return posts
+    return [p for p in posts if first_image(p)]
 
 
 def card(post, parts):
@@ -323,6 +435,28 @@ def card(post, parts):
     cls = "tbx-card" if img or "media" not in parts else "tbx-card tbx-card--text"
     return (f'    <a class="{cls}" href="{esc(link)}" target="_blank" rel="noopener noreferrer">\n'
             f'      {inner}\n    </a>')
+
+
+def badge(posts):
+    """Rating Badge / Badge: the average of every rated post, its stars and the count."""
+    rated = [p for p in posts if isinstance(p.get("rating"), (int, float)) and 1 <= p["rating"] <= 5]
+    nets = []
+    for p in rated:
+        n = p.get("network") or {}
+        if n.get("slug") and n["slug"] not in [x["slug"] for x in nets]:
+            nets.append({"slug": n["slug"], "name": n.get("name") or ""})
+    avg = sum(p["rating"] for p in rated) / len(rated) if rated else 0
+    title = f'{nets[0]["name"]} Reviews' if len(nets) == 1 else "Customer Reviews"
+    full = int(avg + 0.5)
+    marks = "".join(f'<span class="tbx-net" data-net="{esc(n["slug"])}" data-mark="{esc(NET_MARK.get(n["slug"], n["name"][:1]))}" '
+                    f'title="{esc(n["name"])}"></span>' for n in nets)
+    return (f'  <div class="tbx-badge">\n'
+            f'    <div class="tbx-badge-nets">{marks}</div>\n'
+            f'    <div class="tbx-badge-title">{esc(title)}</div>\n'
+            f'    <div class="tbx-badge-score"><span class="tbx-badge-avg">{avg:.1f}</span>'
+            f'<span class="tbx-stars" aria-label="{avg:.1f} out of 5">{"★" * full}{"☆" * (5 - full)}</span></div>\n'
+            f'    <div class="tbx-badge-count">Based on {len(rated)} review{"" if len(rated) == 1 else "s"}</div>\n'
+            f'  </div>')
 
 
 def theme_vars(style, slug):
@@ -384,9 +518,12 @@ def build(name, theme_type, style, posts):
         font_link = (f'<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n'
                      f'<link rel="stylesheet" href="{meta["font_url"]}">\n')
 
-    cards = "\n".join(card(p, parts) for p in posts)
+    cards = "\n".join(card(p, parts) for p in visible(posts, parts))
     clamp = " tbx-clamp" if meta["clamp"] else ""
-    if layout == "slider":
+    script = ""
+    if layout == "badge":
+        body = badge(posts)
+    elif layout == "slider":
         body = (f'  <div class="tbx-slider">\n'
                 f'  <button class="tbx-arrow tbx-arrow--prev" type="button" data-dir="-1" aria-label="Previous">‹</button>\n'
                 f'  <div class="tbx-track">\n{cards}\n  </div>\n'
@@ -400,7 +537,6 @@ def build(name, theme_type, style, posts):
                   "    });\n  });\n</script>")
     else:
         body = f'  <div class="tbx-track">\n{cards}\n  </div>'
-        script = ""
 
     return f"""<!DOCTYPE html>
 <html lang="en">
@@ -439,7 +575,7 @@ def build_html_index():
 
 HTML_INDEX_BEFORE = '<!DOCTYPE html>\n<html lang="en">\n<head>\n<meta charset="utf-8">\n<meta name="viewport" content="width=device-width, initial-scale=1">\n<title>Social Widget</title>\n<!-- Theme CSS: posts.php serves themes/<WIDGET_THEME>.css + custom.css -->\n<link rel="stylesheet" href="posts.php?css=1">\n</head>\n<body>\n<!-- Social Widget - Simple HTML starter. No framework, no build step.\n     The token lives only in posts.php (View Source here shows none). -->\n<section class="tbx-widget" id="social-widget">\n  <h1 class="tbx-header">Social Widget</h1>\n  <p class="tbx-empty">Loading posts…</p>\n</section>\n<script>\n(function () {\n  // Same card markup as preview.html. Every value is escaped before it is\n  // written; links and images are limited to http(s).\n  '
 
-HTML_INDEX_AFTER = '\n\n  var root = document.getElementById(\'social-widget\');\n\n  function show(data) {\n    var meta = data.theme;\n    var posts = data.posts || [];\n    root.className = \'tbx-widget tbx-t-\' + meta.slug + \' tbx-l-\' + meta.layout + (meta.clamp ? \' tbx-clamp\' : \'\');\n    var note = data.sample ? \'<p class="tbx-note">Sample posts - set ACCESS_TOKEN in .env to show your gallery.</p>\' : \'\';\n    var track = posts.length\n      ? \'<div class="tbx-track">\' + posts.map(function (p) { return renderCard(p, meta.parts); }).join(\'\\n\') + \'</div>\'\n      : \'<p class="tbx-empty">No posts to show yet.</p>\';\n    if (meta.layout === \'slider\' && posts.length) {\n      track = \'<div class="tbx-slider"><button class="tbx-arrow tbx-arrow--prev" type="button" data-dir="-1" aria-label="Previous">‹</button>\'\n        + track + \'<button class="tbx-arrow tbx-arrow--next" type="button" data-dir="1" aria-label="Next">›</button></div>\';\n    }\n    root.innerHTML = \'<h1 class="tbx-header">Social Widget</h1>\' + note + track;\n    // Arrows scroll the row by one view.\n    root.querySelectorAll(\'.tbx-arrow\').forEach(function (b) {\n      b.addEventListener(\'click\', function () {\n        var t = b.parentNode.querySelector(\'.tbx-track\');\n        t.scrollBy({ left: b.dataset.dir * t.clientWidth, behavior: \'smooth\' });\n      });\n    });\n  }\n\n  fetch(\'posts.php\')\n    .then(function (r) { if (!r.ok) throw new Error(\'HTTP \' + r.status); return r.json(); })\n    .then(show)\n    .catch(function () {\n      root.querySelector(\'.tbx-empty\').textContent =\n        \'Could not load posts. Open this page through a PHP server (see README) - preview.html shows the design without one.\';\n    });\n})();\n</script>\n</body>\n</html>\n'
+HTML_INDEX_AFTER = '\n\n  var root = document.getElementById(\'social-widget\');\n\n  function show(data) {\n    var meta = data.theme;\n    var posts = visiblePosts(data.posts || [], meta.parts);\n    root.className = \'tbx-widget tbx-t-\' + meta.slug + \' tbx-l-\' + meta.layout + (meta.clamp ? \' tbx-clamp\' : \'\');\n    var note = data.sample ? \'<p class="tbx-note">Sample posts - set ACCESS_TOKEN in .env to show your gallery.</p>\' : \'\';\n    var track = posts.length\n      ? \'<div class="tbx-track">\' + posts.map(function (p) { return renderCard(p, meta.parts); }).join(\'\\n\') + \'</div>\'\n      : \'<p class="tbx-empty">No posts to show yet.</p>\';\n    if (meta.layout === \'badge\' && posts.length) track = renderBadge(posts);\n    if (meta.layout === \'slider\' && posts.length) {\n      track = \'<div class="tbx-slider"><button class="tbx-arrow tbx-arrow--prev" type="button" data-dir="-1" aria-label="Previous">‹</button>\'\n        + track + \'<button class="tbx-arrow tbx-arrow--next" type="button" data-dir="1" aria-label="Next">›</button></div>\';\n    }\n    root.innerHTML = \'<h1 class="tbx-header">Social Widget</h1>\' + note + track;\n    // Arrows scroll the row by one view.\n    root.querySelectorAll(\'.tbx-arrow\').forEach(function (b) {\n      b.addEventListener(\'click\', function () {\n        var t = b.parentNode.querySelector(\'.tbx-track\');\n        t.scrollBy({ left: b.dataset.dir * t.clientWidth, behavior: \'smooth\' });\n      });\n    });\n  }\n\n  fetch(\'posts.php\')\n    .then(function (r) { if (!r.ok) throw new Error(\'HTTP \' + r.status); return r.json(); })\n    .then(show)\n    .catch(function () {\n      root.querySelector(\'.tbx-empty\').textContent =\n        \'Could not load posts. Open this page through a PHP server (see README) - preview.html shows the design without one.\';\n    });\n})();\n</script>\n</body>\n</html>\n'
 
 
 def main():
@@ -456,6 +592,13 @@ def main():
         (THEME_OUT / f"{slug}.css").write_text(css)
         (THEME_OUT / f"{slug}.json").write_text(json.dumps(meta, indent=2) + "\n")
     print(f"guides/previews/ and templates/themes/: {len(THEMES)} themes")
+    build_gallery()
+    # Themes no longer in THEMES must not linger as stale files.
+    keep = {v[0] for v in THEMES.values()}
+    for folder, ext in ((OUT, ".html"), (THEME_OUT, ".css"), (THEME_OUT, ".json")):
+        for f in folder.glob("*" + ext):
+            if f.stem not in keep:
+                f.unlink()
 
     # The starters show the same 6 sample posts as the previews until a token is set.
     # They run in a real browser, where the images load, so the base64 thumbnails are left out.

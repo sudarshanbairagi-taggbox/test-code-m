@@ -233,6 +233,36 @@ function sw_card(array $post, array $parts): string
     return "    <a class=\"$cls\" href=\"" . e($href) . "\" target=\"_blank\" rel=\"noopener noreferrer\">\n      $inner\n    </a>";
 }
 
+/** Rating Badge / Badge: the average of every rated post, its stars and the count. */
+function sw_badge(array $posts): string
+{
+    $rated = array_values(array_filter($posts, fn($p) => is_array($p) && is_numeric($p['rating'] ?? null)
+        && !is_string($p['rating']) && $p['rating'] >= 1 && $p['rating'] <= 5));
+    $nets = [];
+    foreach ($rated as $p) {
+        $slug = (string) ($p['network']['slug'] ?? '');
+        if ($slug !== '' && !isset($nets[$slug])) {
+            $nets[$slug] = (string) ($p['network']['name'] ?? '');
+        }
+    }
+    $count = count($rated);
+    $avg = $count ? array_sum(array_column($rated, 'rating')) / $count : 0;
+    $title = count($nets) === 1 ? reset($nets) . ' Reviews' : 'Customer Reviews';
+    $full = (int) floor($avg + 0.5);
+    $marks = '';
+    foreach ($nets as $slug => $name) {
+        $marks .= '<span class="tbx-net" data-net="' . e($slug) . '" data-mark="' . e(SW_NET_MARK[$slug] ?? sw_first_char($name)) . '" title="' . e($name) . '"></span>';
+    }
+    $a = number_format($avg, 1);
+    return "  <div class=\"tbx-badge\">\n"
+        . "    <div class=\"tbx-badge-nets\">$marks</div>\n"
+        . '    <div class="tbx-badge-title">' . e($title) . "</div>\n"
+        . "    <div class=\"tbx-badge-score\"><span class=\"tbx-badge-avg\">$a</span>"
+        . "<span class=\"tbx-stars\" aria-label=\"$a out of 5\">" . str_repeat('★', $full) . str_repeat('☆', 5 - $full) . "</span></div>\n"
+        . "    <div class=\"tbx-badge-count\">Based on $count review" . ($count === 1 ? '' : 's') . "</div>\n"
+        . '  </div>';
+}
+
 // ---------- page ----------
 
 $theme = sw_theme();
@@ -244,6 +274,13 @@ try {
     $data = ['posts' => [], 'paging' => null];
 }
 $posts = $data['posts'] ?? [];
+// Photo-only themes skip posts without an image - they would be empty cards.
+if ($meta['parts'] === ['media']) {
+    $posts = array_values(array_filter($posts, fn($p) => is_array($p) && (bool) array_filter(
+        is_array($p['media'] ?? null) ? $p['media'] : [],
+        fn($m) => is_array($m) && ($m['type'] ?? '') === 'image' && sw_safe_url($m['cdn_url'] ?? null)
+    )));
+}
 $slider = ($meta['layout'] ?? '') === 'slider' && $posts;
 $cards = implode("\n", array_map(fn($p) => sw_card(is_array($p) ? $p : [], $meta['parts']), $posts));
 header('Content-Type: text/html; charset=utf-8');
@@ -269,6 +306,9 @@ header('Content-Type: text/html; charset=utf-8');
 <?php endif; ?>
 <?php if (!$posts): ?>
   <p class="tbx-empty">No posts to show yet.</p>
+<?php elseif (($meta['layout'] ?? '') === 'badge'): ?>
+<?= sw_badge($posts) ?>
+
 <?php else: ?>
 <?php if ($slider): ?>
   <div class="tbx-slider">

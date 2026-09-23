@@ -3,7 +3,7 @@
 Links written BASE/<path> are files in this repo. BASE is the one my prompt gave; if it gave none, BASE is where you got this file: the URL up to and including the branch name, or the local repo folder.
 
 Step 4 writes no code any more: the React code is finished, tested and
-zipped with all 16 themes, the sample posts and a README:
+zipped with all 19 themes, the sample posts and a README:
 BASE/templates/dist/social-widget-react.zip
 (source: BASE/templates/react/ - built by tools/build-previews.py).
 

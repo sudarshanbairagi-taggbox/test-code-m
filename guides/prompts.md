@@ -119,7 +119,7 @@ one step per reply:
    HTML) and whether to change anything. Each change comes back as a few
    lines of `custom.css`, not a rewritten file.
 4. **Code + README** — it links the stack's ready zip
-   ([templates/dist/](../templates/dist)): finished code, all 16 themes, the
+   ([templates/dist/](../templates/dist)): finished code, all 19 themes, the
    sample posts and a README. You set `WIDGET_THEME` in `.env`, add
    `custom.css` if you made one, and run it. Then it lists what you could
    add next and asks for your token.
