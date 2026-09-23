@@ -8,14 +8,13 @@ answer with one number or word.
 
 Speed matters on every step. Everything is already built - the
 previews, the code for every stack, the READMEs - so besides this file
-you fetch only the one preview in step 2. Write no code unless a step
-says so, and run no tests, audits, scripts or
+you fetch only what step 2 and step 4 name. Write no new code, and run no tests, audits, scripts or
 checks. No plan, no recap, no "here is what I will do". Write every
 link as a full URL: BASE followed by the path.
 
-If you can write files and run commands in my project (Claude Code,
-Cursor, Copilot, Codex, Windsurf, Gemini CLI...), do the downloading,
-unzipping and saving yourself instead of asking me to.
+If you can write files in my project (Claude Code, Cursor, Copilot,
+Codex, Windsurf, Gemini CLI...), save the files yourself instead of
+showing them to me - same content, same paths.
 
 ## Step 1 - pick a theme (fetch nothing)
 
@@ -63,7 +62,7 @@ Then reply with only this:
 
 ## Step 3 - customise (optional, repeat as often as I ask)
 
-Do not rewrite the preview. Every look is set by CSS variables, so a
+Do not redesign the preview. Every look is set by CSS variables, so a
 change is a few lines in a file called custom.css. The variables:
 --tbx-bg (page), --tbx-surface (card), --tbx-text, --tbx-author,
 --tbx-font, --tbx-weight, --tbx-size (text size), --tbx-radius (card
@@ -84,30 +83,43 @@ adding to any custom.css from earlier in this chat. Then reply with:
 Then ask: "Anything else to change, or which stack?"
 Fetch nothing. It ends when I name a stack.
 
-## Step 4 - the code for my stack (fetch nothing, write no code)
+## Step 4 - the files for my stack (fetch 3 files, write no new code)
 
-The code for every stack is ready in one zip, with all 16 themes, the
-sample posts and a README inside:
-- PHP:         BASE/templates/dist/social-widget-php.zip
-- Node.js:     BASE/templates/dist/social-widget-nodejs.zip
-- React:       BASE/templates/dist/social-widget-react.zip
-- Simple HTML: BASE/templates/dist/social-widget-html.zip
+The code for every stack is finished. Fetch RAW these three
+- nothing else:
+1. My stack's files, all in one text file - each file starts with a
+   line "===== FILE: <path> =====":
+   - PHP:         BASE/templates/dist/social-widget-php.txt
+   - Node.js:     BASE/templates/dist/social-widget-nodejs.txt
+   - React:       BASE/templates/dist/social-widget-react.txt
+   - Simple HTML: BASE/templates/dist/social-widget-html.txt
+2. BASE/templates/themes/<slug>.css
+3. BASE/templates/themes/<slug>.json
 
-Reply with only this, short:
-1. The download link for my stack; unzip it.
-2. In that folder, copy .env.example to .env and set
-   WIDGET_THEME=<slug> (my theme from step 2). ACCESS_TOKEN can stay
-   empty for now - it shows the sample posts.
-3. Only if step 3 made a custom.css: save it in the same folder.
-4. How to start it, one line:
-   - PHP / Simple HTML: `php -S localhost:8080`, open
-     http://localhost:8080 - or upload the folder to any PHP host.
-   - Node.js: `npm install`, then `npm start`, open
-     http://localhost:3000
-   - React: `npm install`, then `npm run dev`, open
-     http://localhost:5173
-5. "README.md in the zip has every step, for someone who has never
-   used a terminal."
+Hand every file over here in the chat, each as its own code block
+headed with its path, ready to save - exactly as fetched, character for
+character. Do not rewrite, shorten, "improve" or merge any of them, and
+write no "rest stays the same". The files, in this order:
+- every file from the stack text file, except .env.example and
+  except the sample file I do not need: samples/social.json for a
+  social theme, samples/reviews.json for a review theme (14-16) - give
+  only that one;
+- themes/<slug>.css and themes/<slug>.json (keep the themes/ folder);
+- custom.css, only if step 3 made one - the final version, with every
+  change from step 3 (the code adds it after the theme, so my changes
+  show);
+- .env - the .env.example text with WIDGET_THEME=<slug> filled in and
+  ACCESS_TOKEN left empty (it shows the sample posts until I add it).
+
+After the files, short:
+- one line: save them all in one folder, keeping the paths (themes/,
+  samples/, and src/ for React).
+- how to start it, one line:
+  - PHP / Simple HTML: `php -S localhost:8080`, open
+    http://localhost:8080 - or upload the folder to any PHP host.
+  - Node.js: `npm install`, then `npm start`, open http://localhost:3000
+  - React: `npm install`, then `npm run dev`, open http://localhost:5173
+- "README.md has every step, for someone who has never used a terminal."
 Then a short "What you can add next" list - 4 to 6 one-line ideas I
 could send back as my next request, picked from: a network filter bar,
 a "Load more" / next-page link, auto-refresh, a lightbox for images and
