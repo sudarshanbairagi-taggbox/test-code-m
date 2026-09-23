@@ -1,7 +1,7 @@
 # Step 2 - preview.html in the chat (only when asked)
 
-steps.md normally answers step 2 with a link to the finished preview. Use
-this file only when I asked for the file itself here in the chat.
+steps.md step 2 already hands over the finished preview. This file is the
+same step for prompts that link it directly.
 
 Links written BASE/<path> are files in this repo. BASE is the one my prompt gave; if it gave none, BASE is where you got this file: the URL up to and including the branch name, or the local repo folder.
 

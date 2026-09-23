@@ -7,9 +7,9 @@ for my answer. Keep every question short, as a numbered list I can
 answer with one number or word.
 
 Speed matters on every step. Everything is already built - the
-previews, the code for every stack, the READMEs - so this file is the
-only one you need: fetch nothing else unless a step says so, write no
-code unless a step says so, and run no tests, audits, scripts or
+previews, the code for every stack, the READMEs - so besides this file
+you fetch only the one preview in step 2. Write no code unless a step
+says so, and run no tests, audits, scripts or
 checks. No plan, no recap, no "here is what I will do". Write every
 link as a full URL: BASE followed by the path.
 
@@ -33,7 +33,7 @@ Reviews
 
 Then stop.
 
-## Step 2 - the preview (fetch nothing, write no code)
+## Step 2 - the preview (fetch ONE file, write no code)
 
 Each theme's preview is a finished file. Its name (the "slug") is the
 theme name in lower case with dashes: 1 modern-card, 2 classic-card,
@@ -42,19 +42,24 @@ theme name in lower case with dashes: 1 modern-card, 2 classic-card,
 10 highlight-slider, 11 reels, 12 vivid, 13 widget-theme,
 14 review-carousel, 15 review-list, 16 review-box.
 
-Reply with only this:
-- "Your preview (<theme name>):" and the link
-  BASE/guides/previews/<slug>.html
-- one line: open the link, save the page as preview.html
-  (right-click > Save as, or Ctrl/Cmd+S), then double-click the file -
-  it opens in the browser with sample posts, no token needed.
+Fetch RAW BASE/guides/previews/<slug>.html and give it back to me as
+preview.html, exactly as it is, character for character - same CSS,
+markup, sample posts, image URLs and base64 "data:image" thumbnails -
+so this chat shows it (as an artifact, canvas or preview pane). Do not
+redesign, shorten or rewrite it, and fetch nothing else.
+
+Then reply with only this:
+- one line: images show blurred inside this chat's preview; the full
+  images load in a browser - open <link> or save preview.html and
+  double-click it. Build <link> from BASE with
+  "https://raw.githubusercontent.com/" swapped for
+  "https://raw.githack.com/" (the rest of the path, branch included,
+  stays the same) + /guides/previews/<slug>.html; raw GitHub would
+  show it as code. If BASE is a local folder, give the file path.
 - these two questions:
   1. Want to change anything? (colours, font, columns, corners,
      spacing...) - or say "no".
   2. Which stack should I build it in? PHP / Node.js / React / Simple HTML
-
-If I say I cannot open or save the link and want the file here, fetch
-BASE/prompts/library/build/preview.md and follow it instead.
 
 ## Step 3 - customise (optional, repeat as often as I ask)
 
@@ -68,11 +73,15 @@ per view on sliders), --tbx-align, --tbx-lines (text lines shown).
 Class names, for anything else: .tbx-card, .tbx-media, .tbx-head,
 .tbx-author, .tbx-date, .tbx-net, .tbx-text, .tbx-stars, .tbx-header.
 
-Reply with custom.css in one short code block - only what changes,
-mostly one `:root { ... }` block, adding to any custom.css from
-earlier in this chat - then one line: to see it now, paste it just
-before </style> in preview.html and reopen it; keep it as custom.css
-for the build. Then ask: "Anything else to change, or which stack?"
+Write custom.css - only what changes, mostly one `:root { ... }` block,
+adding to any custom.css from earlier in this chat. Then reply with:
+1. preview.html again, so this chat shows the change: the step 2 file
+   exactly as it was, with the whole custom.css pasted in just before
+   its </style>, under a /* custom.css */ comment. Change nothing else
+   in the file.
+2. custom.css in one short code block, with one line: keep it - it
+   goes into the build in step 4.
+Then ask: "Anything else to change, or which stack?"
 Fetch nothing. It ends when I name a stack.
 
 ## Step 4 - the code for my stack (fetch nothing, write no code)

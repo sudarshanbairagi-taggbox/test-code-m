@@ -112,9 +112,9 @@ one step per reply:
 
 1. **Theme** — it lists the themes; answer with a number, or `skip` for the
    default (Modern Card).
-2. **Preview** — it links the theme's finished `preview.html`
-   ([guides/previews/](previews)) with sample posts baked in. Save it and
-   double-click it to see the design.
+2. **Preview** — it hands over the theme's finished `preview.html`
+   ([guides/previews/](previews)) with sample posts baked in, shown right in
+   the chat (blurred thumbnails there; full images in a browser).
 3. **Stack + changes** — it asks which stack (PHP / Node.js / React / Simple
    HTML) and whether to change anything. Each change comes back as a few
    lines of `custom.css`, not a rewritten file.
@@ -124,8 +124,8 @@ one step per reply:
    `custom.css` if you made one, and run it. Then it lists what you could
    add next and asks for your token.
 
-The AI fetches only [build/steps.md](../prompts/library/build/steps.md) and
-writes no code, so the whole flow is quick. The previews, theme files and zips
+The AI fetches only [build/steps.md](../prompts/library/build/steps.md) and one
+preview file, and writes no code, so the whole flow is quick. The previews, theme files and zips
 are built by `python3 tools/build-previews.py` from
 [templates/](../templates) — run it after changing a starter, a theme or the
 sample posts.
