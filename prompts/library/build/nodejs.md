@@ -10,3 +10,5 @@ nothing else.
 Deliver server.js and package.json: the page in Node.js 18+ with
 Express - API call, cache, HTML, CSS, all inside server.js. Same
 markup, CSS and theme as the final preview.html.
+package.json: dependencies express and dotenv only; script "start".
+Port from PORT, default 3000.

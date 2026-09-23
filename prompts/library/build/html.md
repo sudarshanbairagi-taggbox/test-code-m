@@ -14,10 +14,13 @@ Deliver:
   script (no framework, no build step) that fetches posts.php and
   renders the same cards. Build text with textContent, never
   innerHTML with post data; allow only http/https links. If the fetch
-  fails, keep showing the sample posts already in the markup.
+  fails or returns no posts, keep showing the sample posts already in
+  the markup.
 - posts.php - ONE PHP 8 file, the only place the token lives: calls
   Taggbox with the cache (common.md) and returns { posts, paging } as
-  JSON; an empty ACCESS_TOKEN returns the sample posts.
+  JSON. An empty ACCESS_TOKEN returns { "posts": [] } - the sample
+  posts live only in index.html's markup, never copied into posts.php;
+  index.html keeps them when the list comes back empty.
 
 Say in one line that this runs on any PHP host (cPanel and the like);
 for a host without PHP the Node.js stack is the one to pick.

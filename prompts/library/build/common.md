@@ -21,7 +21,10 @@ header, the README and the code comments - never "social wall".
 Settings: two environment variables, never values in the code -
 ACCESS_TOKEN (the gallery's access token) and API_BASE_URL
 (https://api.taggbox.com/api; strip a trailing slash). Ship a
-.env.example with both keys, ACCESS_TOKEN left empty.
+.env.example with both keys, ACCESS_TOKEN left empty. Loading .env:
+- PHP: getenv() first, else a tiny .env reader inside the same file.
+  No Composer, no vendor/ folder, no composer.json.
+- Node: the dotenv package, loaded at the top of server.js.
 
 Data: GET {API_BASE_URL}/v3/posts?limit=24, header Authorization:
 Bearer <ACCESS_TOKEN>. Posts are at body.posts and paging at
@@ -58,6 +61,12 @@ and check the build myself.
 
 Every file complete - no placeholders, no "rest stays the same", no
 truncation - with brief comments through the code.
+
+Files: deliver ONLY the files the stack step lists, at exactly those
+paths, plus .env.example and README.md - nothing else. No zip, no
+package-lock.json, no separate sample-posts file (the sample posts
+live inside the server file; for Simple HTML, only in index.html). Do not run npm install, a build, a
+server or any other command - just write the files.
 
 ## Cache (index.php, server.js, posts.php)
 

@@ -45,6 +45,20 @@ content.text; created_at as a short date; rating 1-5 as stars on
 review posts; the card links to source.permalink with
 rel="noopener noreferrer". Brief comments in the code.
 
+Image fallback - chat preview panes (claude.ai, ChatGPT canvas, editor
+previews) block outside images, so a card must still look finished
+without its image. Give .tbx-media a soft gradient from the theme
+colours with the network name centred on it (data-network attribute +
+::after), make it position: relative, and cover a broken image with
+this, so no broken-image icon shows:
+  .tbx-media img::before { content: ""; position: absolute; inset: 0;
+    background: inherit; }
+In a real browser the image loads on top and hides the tile.
+
+Before the questions, add one line: images may not show inside this
+chat's preview pane - save preview.html and double-click it to open it
+in a browser, where they load.
+
 End the reply with exactly these two questions, short:
 1. Want to change anything in this preview? (colours, font, columns,
    card style, hide author/date...) - or say "no".
