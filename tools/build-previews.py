@@ -27,6 +27,9 @@ SAMPLE_OUT = ROOT / "templates" / "samples"
 DIST = ROOT / "templates" / "dist"
 STACKS = ["php", "nodejs", "react", "html"]
 POSTS_PER_PREVIEW = 6
+# Gallery sprite: px per thumbnail and WebP quality. Wider = sharper but a longer page to copy.
+SPRITE_WIDTH = 120
+SPRITE_QUALITY = 50
 
 # Theme name -> (file slug, layout, card parts in order).
 # Layouts: grid, list, masonry, collage, slider. Parts: media, head, stars, text.
@@ -81,6 +84,7 @@ GALLERY_PAGE = """<!DOCTYPE html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<base href="https://raw.githack.com/sudarshanbairagi-taggbox/test-code-m/main/guides/" target="_blank">
 <title>Social Widget - themes</title>
 <style>
   body { margin: 0; font: 15px/1.4 system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif; background: #f4f5f8; color: #1f1f1f; }
@@ -91,7 +95,9 @@ GALLERY_PAGE = """<!DOCTYPE html>
   .t { display: flex; flex-direction: column; gap: 4px; padding: 10px; background: #fff; border-radius: 10px;
     box-shadow: 0 1px 6px rgba(0,0,0,.08); color: inherit; text-decoration: none; }
   .t:hover { box-shadow: 0 4px 16px rgba(0,0,0,.14); }
-  .t img { width: 100%; aspect-ratio: 971 / 701; object-fit: contain; background: #fff; border-radius: 6px; }
+  .t i { display: block; aspect-ratio: 971 / 701; border-radius: 6px; overflow: hidden;
+    background: #fff url(SPRITE) 0 0 / 100% FRAMES% no-repeat; }
+  .t img { display: block; width: 100%; height: 100%; object-fit: contain; background: #fff; }
   .t span { font-size: .85em; opacity: .7; }
 </style>
 </head>
@@ -108,14 +114,45 @@ TILES
 """
 
 
+def gallery_sprite(ids):
+    """Every thumbnail stacked in one small base64 WebP. The chat that shows the gallery (step 1)
+    often blocks outside images, so this is all it shows - it must be sharp yet short, as the AI
+    copies it character for character. The real PNGs load on top of it where they can."""
+    try:
+        import base64, io
+        from PIL import Image, ImageFilter
+    except ImportError:  # no Pillow: keep the sprite already in the page
+        old = (ROOT / "guides/theme-gallery.html").read_text()
+        return old.split("background: #fff url(", 1)[1].split(")", 1)[0]
+    w = SPRITE_WIDTH
+    h = round(w * 701 / 971)
+    sheet = Image.new("RGB", (w, h * len(ids)), "white")
+    for i, tid in enumerate(ids):
+        im = Image.open(ROOT / f"guides/themes/bigThumb{tid}.png").convert("RGBA")
+        flat = Image.new("RGBA", im.size, "white")
+        flat.alpha_composite(im)
+        im = flat.convert("RGB")
+        im.thumbnail((w, h), Image.LANCZOS)
+        im = im.filter(ImageFilter.UnsharpMask(1, 60, 2))
+        sheet.paste(im, ((w - im.width) // 2, i * h + (h - im.height) // 2))
+    buf = io.BytesIO()
+    sheet.save(buf, "WEBP", quality=SPRITE_QUALITY, method=6)
+    return "data:image/webp;base64," + base64.b64encode(buf.getvalue()).decode()
+
+
 def build_gallery():
     """guides/theme-gallery.html: every theme's thumbnail with its number, for step 1."""
     tiles = []
+    n = len(GALLERY)
     for i, (name, (tid, kind, desc)) in enumerate(GALLERY.items(), 1):
         slug = THEMES[name][0]
-        tiles.append(f'  <a class="t" href="previews/{slug}.html"><img src="themes/bigThumb{tid}.png" alt="" loading="lazy">'
+        pos = f"{(i - 1) * 100 / (n - 1):.4g}%"
+        tiles.append(f'  <a class="t" href="previews/{slug}.html"><i style="background-position:0 {pos}">'
+                     f'<img src="themes/bigThumb{tid}.png" alt="" loading="lazy" onerror="this.remove()"></i>'
                      f'<b>{i}. {esc(name)}</b><span>{kind} - {esc(desc)}</span></a>')
-    (ROOT / "guides/theme-gallery.html").write_text(GALLERY_PAGE.replace("TILES", "\n".join(tiles)))
+    page = (GALLERY_PAGE.replace("SPRITE", gallery_sprite([v[0] for v in GALLERY.values()]))
+            .replace("FRAMES", str(n * 100)).replace("TILES", "\n".join(tiles)))
+    (ROOT / "guides/theme-gallery.html").write_text(page)
 
 
 # Short brand marks for the network badge (no external icon files).
