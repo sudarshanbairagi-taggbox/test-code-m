@@ -8,7 +8,7 @@ answer with one number or word.
 
 Speed matters on every step. Everything is already built - the
 previews, the code for every stack, the READMEs - so besides this file
-you fetch only what step 2 and step 4 name. Write no new code, and run no tests, audits, scripts or
+you fetch only what steps 1, 2 and 4 name. Write no new code, and run no tests, audits, scripts or
 checks. No plan, no recap, no "here is what I will do". Write every
 link as a full URL: BASE followed by the path.
 
@@ -16,13 +16,21 @@ If you can write files in my project (Claude Code, Cursor, Copilot,
 Codex, Windsurf, Gemini CLI...), save the files yourself instead of
 showing them to me - same content, same paths.
 
-## Step 1 - pick a theme (fetch nothing)
+## Step 1 - pick a theme (fetch ONE file)
 
-Show me this table. After the table, one line with the theme
-gallery - every picture large, click one to see its preview: <host>/guides/theme-gallery.html, where
-<host> is BASE with "https://raw.githubusercontent.com/" swapped for
-"https://raw.githack.com/" (raw GitHub would show the page as code; if
-BASE is a local folder, give the file path). Then ask which one I
+Fetch RAW BASE/guides/theme-gallery.html and give it back to me as
+gallery.html, exactly as it is, character for character - same CSS,
+markup, links, image URLs and base64 "data:image" thumbnails - so this
+chat shows it (as an artifact, canvas or preview pane). Do not
+redesign, shorten or rewrite it, and fetch nothing else. If this chat
+cannot show a preview, skip gallery.html.
+
+Then show me this table. After the table, one line: the gallery shows
+blurred inside this chat's preview; every picture loads large in a
+browser, click one to see its preview: <host>/guides/theme-gallery.html,
+where <host> is BASE with "https://raw.githubusercontent.com/" swapped
+for "https://raw.githack.com/" (raw GitHub would show the page as code;
+if BASE is a local folder, give the file path). Then ask which one I
 want - "skip", or any reply that is not a number or name, means
 3. Modern Card.
 
