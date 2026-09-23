@@ -28,8 +28,8 @@ DIST = ROOT / "templates" / "dist"
 STACKS = ["php", "nodejs", "react", "html"]
 POSTS_PER_PREVIEW = 6
 # Gallery sprite: px per thumbnail and WebP quality. Wider = sharper but a longer page to copy.
-SPRITE_WIDTH = 120
-SPRITE_QUALITY = 50
+SPRITE_WIDTH = 300
+SPRITE_QUALITY = 40
 
 # Theme name -> (file slug, layout, card parts in order).
 # Layouts: grid, list, masonry, collage, slider. Parts: media, head, stars, text.
