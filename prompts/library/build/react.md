@@ -2,15 +2,15 @@
 
 Links written BASE/<path> are files in this repo. BASE is the one my prompt gave; if it gave none, BASE is where you got this file: the URL up to and including the branch name, or the local repo folder.
 
-Fetch both RAW first and follow them - the shared rules and the cache:
+Fetch RAW first and follow it - the shared rules, cache and README:
 BASE/prompts/library/build/common.md
-BASE/prompts/library/build/cache.md
-Already fetched one of these earlier in this chat? Do not fetch it again.
+Already fetched it earlier in this chat? Do not fetch it again. Fetch
+nothing else.
 
 The token must never reach the browser, so React never calls Taggbox
 itself. Deliver:
 - server.js - Node.js 18+ with Express. GET /api/posts calls Taggbox
-  with the cache (cache.md) and returns { posts, paging } as JSON; an
+  with the cache (common.md) and returns { posts, paging } as JSON; an
   empty ACCESS_TOKEN returns the sample posts. In production it also
   serves the built app from dist/.
 - package.json - react, react-dom, express, vite,

@@ -2,16 +2,19 @@
 
 Links written BASE/<path> are files in this repo. BASE is the one my prompt gave; if it gave none, BASE is where you got this file: the URL up to and including the branch name, or the local repo folder.
 
-Speed matters here: fetch ONLY the two files below - do NOT fetch
+Speed matters here: fetch ONLY the two files below (the theme file
+and ONE sample file) - do NOT fetch
 llms.txt, the design spec, common.md or any other guide, and run no
 checks, audits or scripts. Everything you need is on this page.
 
 1. My theme's values (find it by name; "skip" = Modern Card):
 BASE/guides/themes-lite.json
-2. The sample posts - social themes use the first, review themes the
-second. Bake in 10-12 of them as they are:
-BASE/guides/sample-posts-social.json
+2. The sample posts - fetch ONE file, never both. Review themes
+(Review Carousel, Review List, Review Box):
 BASE/guides/sample-posts-reviews.json
+Every other theme:
+BASE/guides/sample-posts-social.json
+Bake in all of its posts as they are, image URLs copied exactly.
 Cannot open one? Invent 10 posts in the same shape and say so in one line.
 
 Deliver preview.html: one static file, the sample posts written into

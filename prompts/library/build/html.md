@@ -2,10 +2,10 @@
 
 Links written BASE/<path> are files in this repo. BASE is the one my prompt gave; if it gave none, BASE is where you got this file: the URL up to and including the branch name, or the local repo folder.
 
-Fetch both RAW first and follow them - the shared rules and the cache:
+Fetch RAW first and follow it - the shared rules, cache and README:
 BASE/prompts/library/build/common.md
-BASE/prompts/library/build/cache.md
-Already fetched one of these earlier in this chat? Do not fetch it again.
+Already fetched it earlier in this chat? Do not fetch it again. Fetch
+nothing else.
 
 A plain HTML page cannot hold the token - anyone could read it in
 View Source - so the live data comes through one tiny server file.
@@ -16,7 +16,7 @@ Deliver:
   innerHTML with post data; allow only http/https links. If the fetch
   fails, keep showing the sample posts already in the markup.
 - posts.php - ONE PHP 8 file, the only place the token lives: calls
-  Taggbox with the cache (cache.md) and returns { posts, paging } as
+  Taggbox with the cache (common.md) and returns { posts, paging } as
   JSON; an empty ACCESS_TOKEN returns the sample posts.
 
 Say in one line that this runs on any PHP host (cPanel and the like);

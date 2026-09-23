@@ -7,6 +7,11 @@ for my answer. Keep every question short, as a numbered list I can
 answer with one number or word. Fetch a step's link only when that
 step starts - never fetch ahead.
 
+Speed matters on every step: fetch only the links the step names,
+never re-fetch a file already read in this chat, and run no tests,
+audits, scripts or checks. No plan, no recap, no "here is what I will
+do" - just the deliverable and the step's questions.
+
 ## Step 1 - pick a theme (this reply, fetch nothing else)
 
 Ask me which theme I want, with this list, and say that "skip" (or
@@ -53,8 +58,8 @@ including every change from step 3.
 
 ## Step 5 - README and suggestions (same reply as step 4)
 
-Right after the stack files, in the same reply, fetch RAW and follow:
-BASE/prompts/library/build/readme-file.md
+Right after the stack files, in the same reply, follow the README
+section of common.md (already fetched in step 4 - fetch nothing new).
 
 If you cannot open a link, say so in one line - do not build from
 memory.

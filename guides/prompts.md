@@ -125,7 +125,7 @@ one step per reply:
 The flow lives in [build/steps.md](../prompts/library/build/steps.md); each step links its own file in
 [build/](../prompts/library/build). The stack steps fetch the shared rules
 ([common.md](../prompts/library/build/common.md) — data, field names, security)
-and the cache contract ([cache.md](../prompts/library/build/cache.md)).
+and the cache and README rules, in the same file.
 
 ```
 BASE = https://raw.githubusercontent.com/sudarshanbairagi-taggbox/test-code-m/main - every BASE/... link, here and in the files you fetch, starts from it.
@@ -195,7 +195,7 @@ so paste the files instead of the prompt's link list:
 1. Open the prompt's file from
    [prompts/library/](../prompts/library)
    and paste the text of every file the prompt links instead of the prompt —
-   for Prompt 1, `build/common.md`, `build/cache.md`, then its four parts.
+   for Prompt 1, `build/common.md`, then its four parts.
 2. Attach or paste [llms.txt](../llms.txt) and
    [widget-design-spec.md](widget-design-spec.md)
    in the first message, then the prompt.
