@@ -1,65 +1,50 @@
-# Step 2 - preview.html (fast)
+# Step 2 - preview.html in the chat (only when asked)
+
+steps.md normally answers step 2 with a link to the finished preview. Use
+this file only when I asked for the file itself here in the chat.
 
 Links written BASE/<path> are files in this repo. BASE is the one my prompt gave; if it gave none, BASE is where you got this file: the URL up to and including the branch name, or the local repo folder.
 
-Speed matters here: fetch ONLY the two files below (the theme file
-and ONE sample file) - do NOT fetch
-llms.txt, the design spec, common.md or any other guide, and run no
-checks, audits or scripts. Everything you need is on this page.
+The preview for every theme is already built. Fetch ONLY the one file
+for my theme below and give it back to me as preview.html, exactly as
+it is - same CSS, same markup, same sample posts, same image URLs and
+the same base64 "data:image" thumbnails, character for character. Do
+not redesign it, restyle it or rewrite it from the theme values, and do
+not fetch anything else (no themes JSON, no sample posts, no llms.txt,
+no guide). Run no checks, audits or scripts.
 
-1. My theme's values (find it by name; "skip" = Modern Card):
-BASE/guides/themes-lite.json
-2. The sample posts - fetch ONE file, never both. Review themes
-(Review Carousel, Review List, Review Box):
-BASE/guides/sample-posts-reviews.json
-Every other theme:
-BASE/guides/sample-posts-social.json
-Bake in all of its posts as they are, image URLs copied exactly.
-Cannot open one? Invent 10 posts in the same shape and say so in one line.
+My theme ("skip" or anything that is not a number or name = 1):
+1. Modern Card        BASE/guides/previews/modern-card.html
+2. Classic Card       BASE/guides/previews/classic-card.html
+3. Social Card        BASE/guides/previews/social-card.html
+4. Square Photo       BASE/guides/previews/square-photo.html
+5. Classic Photo      BASE/guides/previews/classic-photo.html
+6. Collage            BASE/guides/previews/collage.html
+7. Horizontal Columns BASE/guides/previews/horizontal-columns.html
+8. Horizontal Slider  BASE/guides/previews/horizontal-slider.html
+9. Gallery Slider     BASE/guides/previews/gallery-slider.html
+10. Highlight Slider  BASE/guides/previews/highlight-slider.html
+11. Reels             BASE/guides/previews/reels.html
+12. Vivid             BASE/guides/previews/vivid.html
+13. Widget Theme      BASE/guides/previews/widget-theme.html
+14. Review Carousel   BASE/guides/previews/review-carousel.html
+15. Review List       BASE/guides/previews/review-list.html
+16. Review Box        BASE/guides/previews/review-box.html
 
-Deliver preview.html: one static file, the sample posts written into
-the markup, CSS in one <style> block inside it. It calls NOTHING - no
-fetch, no token, no API - so I can double-click it. Title and header
-say "Social Widget" (never "social wall"). Name it preview.html, not
-index.html. The later stack files reuse this markup and CSS as is.
+Cannot open it? Say so in one line and stop - do not build one from
+memory.
 
-Theme to CSS (every class .tbx-*, every variable --tbx-*):
-- backgroundColor -> page --tbx-bg; cardColor -> --tbx-surface (empty:
-  use the page colour); fontColor -> text; authorColor -> author name
-  (empty: fontColor).
-- css_font / font_varient / fontSize -> font, weight, text size; load
-  link_font from Google Fonts behind a system-font fallback.
-- roundEdge -> card radius; borderRadius -> image radius; spacing ->
-  grid gap; padding -> card padding.
-- numberOfColumn -> columns (0 = 4), dropping to 2 on tablet, 1 on phone.
-- textAlignment -> text-align; lineTrim -> line-clamp (0 = none);
-  postAuthor / postTime 0 -> hide author / date; hideContent 1 -> hide
-  the text; aspectImageRatio 0 natural, 100 square, 56.25 16:9.
-- A white-on-near-white colour pair: darken it so it reads, and note
-  it in a CSS comment. One skin only - no dark mode, no toggle.
+The file already follows every rule: static, calls no API, "Social
+Widget" title, the first image of each post (never a video), escaped
+text, rel="noopener noreferrer" links, and a blurred base64 thumbnail
+behind each image where a chat pane blocks outside images (the live API
+sends no thumbnail - live cards fall back to the plain tile). The later stack files reuse its markup and
+CSS as is.
 
-Each card: image = the FIRST media entry of type "image" via cdn_url
-(not media[0], which can be a video; none = no image); author.name,
-else author.handle, else nothing (never print "null"); network.name;
-content.text; created_at as a short date; rating 1-5 as stars on
-review posts; the card links to source.permalink with
-rel="noopener noreferrer". Brief comments in the code.
-
-Image fallback - chat preview panes (claude.ai, ChatGPT canvas, editor
-previews) block outside images, so a card must still look finished
-without its image. Give .tbx-media a soft gradient from the theme
-colours with the network name centred on it (data-network attribute +
-::after), make it position: relative, and cover a broken image with
-this, so no broken-image icon shows:
-  .tbx-media img::before { content: ""; position: absolute; inset: 0;
-    background: inherit; }
-In a real browser the image loads on top and hides the tile.
-
-Before the questions, add one line: images may not show inside this
-chat's preview pane - save preview.html and double-click it to open it
-in a browser, where they load.
-
-End the reply with exactly these two questions, short:
+Reply with: the file as preview.html, then one line - images show
+blurred inside this chat's preview pane; save preview.html and
+double-click it to open it in a browser, where the full images load. Then exactly
+these two questions, short:
 1. Want to change anything in this preview? (colours, font, columns,
    card style, hide author/date...) - or say "no".
 2. Which stack should I build it in? PHP / Node.js / React / Simple HTML

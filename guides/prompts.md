@@ -112,20 +112,23 @@ one step per reply:
 
 1. **Theme** — it lists the themes; answer with a number, or `skip` for the
    default (Modern Card).
-2. **Preview** — it writes `preview.html` with sample posts baked in, fast: no
-   spec fetches, no checks. Double-click it to see the design.
+2. **Preview** — it links the theme's finished `preview.html`
+   ([guides/previews/](previews)) with sample posts baked in. Save it and
+   double-click it to see the design.
 3. **Stack + changes** — it asks which stack (PHP / Node.js / React / Simple
-   HTML) and whether to change anything in the preview. Ask for as many
-   changes as you like; each one returns the updated preview.
-4. **Files** — once you name a stack, it writes that stack's files, reusing
-   the preview's markup and CSS.
-5. **README + suggestions** — in the same reply: how to run it, and a short
-   list of what you could add next. Then it asks for your token.
+   HTML) and whether to change anything. Each change comes back as a few
+   lines of `custom.css`, not a rewritten file.
+4. **Code + README** — it links the stack's ready zip
+   ([templates/dist/](../templates/dist)): finished code, all 16 themes, the
+   sample posts and a README. You set `WIDGET_THEME` in `.env`, add
+   `custom.css` if you made one, and run it. Then it lists what you could
+   add next and asks for your token.
 
-The flow lives in [build/steps.md](../prompts/library/build/steps.md); each step links its own file in
-[build/](../prompts/library/build). The stack steps fetch the shared rules
-([common.md](../prompts/library/build/common.md) — data, field names, security)
-and the cache and README rules, in the same file.
+The AI fetches only [build/steps.md](../prompts/library/build/steps.md) and
+writes no code, so the whole flow is quick. The previews, theme files and zips
+are built by `python3 tools/build-previews.py` from
+[templates/](../templates) — run it after changing a starter, a theme or the
+sample posts.
 
 ```
 BASE = https://raw.githubusercontent.com/sudarshanbairagi-taggbox/test-code-m/main - every BASE/... link, here and in the files you fetch, starts from it.

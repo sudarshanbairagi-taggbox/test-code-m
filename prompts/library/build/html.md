@@ -1,26 +1,16 @@
-# Step 4 - Simple HTML: index.html + posts.php
+# Step 4 - Simple HTML
 
 Links written BASE/<path> are files in this repo. BASE is the one my prompt gave; if it gave none, BASE is where you got this file: the URL up to and including the branch name, or the local repo folder.
 
-Fetch RAW first and follow it - the shared rules, cache and README:
-BASE/prompts/library/build/common.md
-Already fetched it earlier in this chat? Do not fetch it again. Fetch
-nothing else.
+Step 4 writes no code any more: the Simple HTML code is finished, tested and
+zipped with all 16 themes, the sample posts and a README:
+BASE/templates/dist/social-widget-html.zip
+(source: BASE/templates/html/ - built by tools/build-previews.py).
 
-A plain HTML page cannot hold the token - anyone could read it in
-View Source - so the live data comes through one tiny server file.
-Deliver:
-- index.html - the preview.html markup and CSS, plus a short inline
-  script (no framework, no build step) that fetches posts.php and
-  renders the same cards. Build text with textContent, never
-  innerHTML with post data; allow only http/https links. If the fetch
-  fails or returns no posts, keep showing the sample posts already in
-  the markup.
-- posts.php - ONE PHP 8 file, the only place the token lives: calls
-  Taggbox with the cache (common.md) and returns { posts, paging } as
-  JSON. An empty ACCESS_TOKEN returns { "posts": [] } - the sample
-  posts live only in index.html's markup, never copied into posts.php;
-  index.html keeps them when the list comes back empty.
+Follow step 4 in BASE/prompts/library/build/steps.md: give me the
+link, WIDGET_THEME=<theme slug> for .env, custom.css if step 3 made
+one, and the one-line start command.
 
-Say in one line that this runs on any PHP host (cPanel and the like);
-for a host without PHP the Node.js stack is the one to pick.
+Later changes to the code (a filter bar, load more, a cache change...)
+go into the starter's own files - index.html + posts.php - keeping its markup, the
+.tbx-* classes and the theme files as they are.
