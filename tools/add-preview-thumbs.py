@@ -2,7 +2,7 @@
 """Add a tiny base64 thumbnail ("preview_data_uri") to the sample posts.
 
 Chat preview panes (claude.ai, ChatGPT canvas) block outside images, so
-preview.html shows this data: URI as a blurred stand-in behind the real
+preview.html shows this data: URI as a stand-in behind the real
 <img>. In a real browser the cdn_url image loads on top. The field is for
 the preview only - the live API never returns it.
 
@@ -21,12 +21,12 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 FILES = ["guides/sample-posts-social.json", "guides/sample-posts-reviews.json"]
 POSTS = 6
-WIDTH = 48      # px - blurred up to card size by CSS
-QUALITY = 50    # JPEG quality
+WIDTH = 200     # px - sharp enough for a card, still ~10 KB so it loads at once
+QUALITY = 60    # JPEG quality
 
 
 def strip_app1(jpeg):
-    """Drop Exif (APP1) segments - dead weight in a 48px thumbnail."""
+    """Drop Exif (APP1) segments - dead weight in a small thumbnail."""
     out, i = bytearray(jpeg[:2]), 2
     while i < len(jpeg) and jpeg[i] == 0xFF and jpeg[i + 1] not in (0xDA, 0xD9):
         size = int.from_bytes(jpeg[i + 2:i + 4], "big")
