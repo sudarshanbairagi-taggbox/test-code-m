@@ -123,8 +123,9 @@ Hand every file over here in the chat, each as its own code block
 headed with its path, ready to save - exactly as fetched, character for
 character. Do not rewrite, shorten, "improve" or merge any of them, and
 write no "rest stays the same". The files, in this order:
-- every file from the stack text file, except .env.example and
-  except the sample file I do not need: samples/social.json for a
+- every file from the stack text file - README.md included (it is
+  already written: how to run, settings, the look, the cache, fixes) -
+  except .env.example and except the sample file I do not need: samples/social.json for a
   social theme, samples/reviews.json for a review theme (15-17) - give
   only that one;
 - themes/<slug>.css and themes/<slug>.json (keep the themes/ folder);
@@ -156,8 +157,21 @@ Write only the files that stack needs to run - usually 2-4:
 - the dependency file, only if the stack has one (package.json,
   requirements.txt, composer.json, go.mod...), with the fewest
   packages;
-- themes/, custom.css and .env exactly as in the list above, and a
-  short README.md (files, settings, one run command).
+- themes/ and custom.css exactly as in the list above;
+- .env - the reference bundle's .env.example keys (ACCESS_TOKEN empty,
+  API_BASE_URL, WIDGET_THEME=<slug>, PORT only if the stack uses one),
+  read on the server the stack's usual way (Laravel env()/config,
+  Django/Flask python-dotenv, Next.js .env.local, Rails/Go/others a
+  dotenv package or the host's settings) - never with a NEXT_PUBLIC_,
+  VITE_, REACT_APP_ or other browser prefix. In a project I already
+  have, do not replace my .env: give only these lines to add to it.
+  One line: add .env to .gitignore;
+- README.md: the reference bundle's README (already fetched) adapted
+  to this stack - same sections (Files, Run it, Settings, Changing the
+  look, How the cache works, If it goes wrong), short, written for
+  someone who has never used a terminal. Change only the file names,
+  commands and where each file goes; keep its line that the token
+  stays on the server.
 No samples/ folder and no sample posts for an Other stack: drop
 samplePosts() / sw_samples() and the file read. An empty ACCESS_TOKEN
 returns no posts (touching neither the API nor the cache) and the page
