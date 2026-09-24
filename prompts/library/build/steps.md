@@ -8,7 +8,8 @@ answer with one number or word.
 
 Speed matters on every step. Everything is already built - the
 previews, the code for every stack, the READMEs - so besides this file
-you fetch only what steps 1, 2 and 4 name. Write no new code, and run no tests, audits, scripts or
+you fetch only what steps 1, 2 and 4 name. Write no new code (the one
+exception: step 4's port for an Other stack), and run no tests, audits, scripts or
 checks. No plan, no recap, no "here is what I will do". Write every
 link as a full URL: BASE followed by the path.
 
@@ -78,7 +79,8 @@ Then reply with only this:
 - these two questions:
   1. Want to change anything? (colours, font, columns, corners,
      spacing...) - or say "no".
-  2. Which stack should I build it in? PHP / Node.js / React / Simple HTML
+  2. Which stack should I build it in? PHP / Node.js / React / Simple HTML /
+     Other (name it - Laravel, WordPress, Next.js, Vue, Django, Flask...)
 
 ## Step 3 - customise (optional, repeat as often as I ask)
 
@@ -100,10 +102,11 @@ adding to any custom.css from earlier in this chat. Then reply with:
    in the file.
 2. custom.css in one short code block, with one line: keep it - it
    goes into the build in step 4.
-Then ask: "Anything else to change, or which stack?"
+Then ask: "Anything else to change, or which stack? (PHP / Node.js / React /
+Simple HTML / Other)"
 Fetch nothing. It ends when I name a stack.
 
-## Step 4 - the files for my stack (fetch 3 files, write no new code)
+## Step 4 - the files for my stack (fetch 3 files, write no new code - except Other)
 
 The code for every stack is finished. Fetch RAW these three
 - nothing else:
@@ -131,6 +134,39 @@ write no "rest stays the same". The files, in this order:
 - .env - the .env.example text with WIDGET_THEME=<slug> filled in and
   ACCESS_TOKEN left empty (it shows the sample posts until I add it).
 
+### Other stack (anything not in the four above)
+
+Still fetch only 3 files, then port - fast, no plan, no scaffold. The
+closest finished bundle is the reference; copy its logic, markup,
+.tbx-* classes, cache and sample-post fallback as they are, changing
+only the language:
+- PHP frameworks (Laravel, WordPress, CodeIgniter, Symfony...):
+  social-widget-php.txt
+- Frontend-only (Vue, Angular, Svelte, plain JS...):
+  social-widget-react.txt - keep its server.js as is (it holds the
+  token), port only the component
+- Everything else (Next.js, Nuxt, Express, Python, Ruby, Go, Java,
+  .NET...): social-widget-nodejs.txt
+plus themes/<slug>.css and themes/<slug>.json as above.
+
+Write only the files that stack needs to run - usually 2-4:
+- one server-side file that calls the API with the token and caches
+  (a route/controller, or the framework's server route - e.g. a
+  Next.js route handler or server component, a Django/Flask view);
+- one view/template/component, only if the stack separates them;
+- the dependency file, only if the stack has one (package.json,
+  requirements.txt, composer.json, go.mod...), with the fewest
+  packages;
+- the sample file, themes/, custom.css and .env exactly as in the list
+  above, and a short README.md (files, settings, one run command).
+For a framework I already have (Laravel, WordPress, Django, Rails...),
+give only the files to drop into my project and one line on where each
+goes - never a new project, config boilerplate, Docker, CI, tests,
+lock files or extra helpers.
+
+The token stays server-side in every port: the browser only ever
+calls my own server's route, never api.taggbox.com.
+
 After the files, short:
 - one line: save them all in one folder, keeping the paths (themes/,
   samples/, and src/ for React).
@@ -139,12 +175,19 @@ After the files, short:
     http://localhost:8080 - or upload the folder to any PHP host.
   - Node.js: `npm install`, then `npm start`, open http://localhost:3000
   - React: `npm install`, then `npm run dev`, open http://localhost:5173
+  - Other: that stack's own one-line start command.
 - "README.md has every step, for someone who has never used a terminal."
 Then a short "What you can add next" list - 4 to 6 one-line ideas I
 could send back as my next request, picked from: a network filter bar,
 a "Load more" / next-page link, auto-refresh, a lightbox for images and
 videos, shopping tags on posts, dropping the widget into a section of
 my existing site, Redis or another cache.
+
+Always add this one line, for every stack: keep ACCESS_TOKEN (and any
+other key) only on the server - in .env or the host's environment
+settings - never in frontend code, a public folder, a VITE_ /
+NEXT_PUBLIC_ / REACT_APP_ variable, or git (put .env in .gitignore);
+anywhere the browser can reach, the token is disclosed.
 
 End by asking for my access token - Taggbox dashboard, the gallery's
 card, its three-dot menu, "Access Token" - and offer to put it in the

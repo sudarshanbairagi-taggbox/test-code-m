@@ -48,4 +48,5 @@ double-click it to open it in a browser, where the full images load. Then exactl
 these two questions, short:
 1. Want to change anything in this preview? (colours, font, columns,
    card style, hide author/date...) - or say "no".
-2. Which stack should I build it in? PHP / Node.js / React / Simple HTML
+2. Which stack should I build it in? PHP / Node.js / React / Simple HTML /
+   Other (name it - Laravel, WordPress, Next.js, Vue, Django, Flask...)
