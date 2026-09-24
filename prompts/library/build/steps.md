@@ -138,13 +138,12 @@ write no "rest stays the same". The files, in this order:
 
 Still fetch only 3 files, then port - fast, no plan, no scaffold. The
 closest finished bundle is the reference; copy its logic, markup,
-.tbx-* classes, cache and sample-post fallback as they are, changing
-only the language:
+.tbx-* classes and cache as they are, changing only the language:
 - PHP frameworks (Laravel, WordPress, CodeIgniter, Symfony...):
   social-widget-php.txt
 - Frontend-only (Vue, Angular, Svelte, plain JS...):
-  social-widget-react.txt - keep its server.js as is (it holds the
-  token), port only the component
+  social-widget-react.txt - keep its server.js (it holds the token),
+  port only the component
 - Everything else (Next.js, Nuxt, Express, Python, Ruby, Go, Java,
   .NET...): social-widget-nodejs.txt
 plus themes/<slug>.css and themes/<slug>.json as above.
@@ -157,8 +156,14 @@ Write only the files that stack needs to run - usually 2-4:
 - the dependency file, only if the stack has one (package.json,
   requirements.txt, composer.json, go.mod...), with the fewest
   packages;
-- the sample file, themes/, custom.css and .env exactly as in the list
-  above, and a short README.md (files, settings, one run command).
+- themes/, custom.css and .env exactly as in the list above, and a
+  short README.md (files, settings, one run command).
+No samples/ folder and no sample posts for an Other stack: drop
+samplePosts() / sw_samples() and the file read. An empty ACCESS_TOKEN
+returns no posts (touching neither the API nor the cache) and the page
+shows the bundle's .tbx-note line instead: "Set ACCESS_TOKEN in .env
+to show your gallery."
+
 For a framework I already have (Laravel, WordPress, Django, Rails...),
 give only the files to drop into my project and one line on where each
 goes - never a new project, config boilerplate, Docker, CI, tests,
@@ -167,9 +172,19 @@ lock files or extra helpers.
 The token stays server-side in every port: the browser only ever
 calls my own server's route, never api.taggbox.com.
 
+Delivery, so I can download instead of copying code blocks:
+- Can write files in my project: save them there (as said at the top).
+- Otherwise, if this chat can make a downloadable file (ChatGPT,
+  claude.ai, Gemini...): put every file in one
+  social-widget-<stack>.zip, keeping the paths, and give me only the
+  download link plus one line per file (path - what it does). No code
+  blocks - that is slower and I would copy them by hand.
+- Only if it cannot make files: each file as its own code block headed
+  with its path.
+
 After the files, short:
 - one line: save them all in one folder, keeping the paths (themes/,
-  samples/, and src/ for React).
+  samples/, and src/ for React; for Other, where each file goes).
 - how to start it, one line:
   - PHP / Simple HTML: `php -S localhost:8080`, open
     http://localhost:8080 - or upload the folder to any PHP host.
