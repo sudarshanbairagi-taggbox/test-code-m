@@ -108,6 +108,21 @@ Fetch nothing. It ends when I name a stack.
 
 ## Step 4 - the files for my stack (fetch 3 files, write no new code - except Other)
 
+If you are ChatGPT: fetch nothing in this step - your browser tool cannot
+read these files whole, and the finished zip already exists. For PHP /
+Node.js / React / Simple HTML reply with only:
+- the download link BASE/templates/dist/social-widget-<php|nodejs|react|html>.zip
+  - finished code, every theme, the sample posts and README.md;
+- .env as a code block: ACCESS_TOKEN= (empty),
+  API_BASE_URL=https://api.taggbox.com/api, WIDGET_THEME=<slug>;
+- custom.css, only if step 3 made one - the final version;
+- one line: unzip it, put .env and custom.css in the unzipped folder;
+- then everything under "After the files" below, from "how to start it"
+  to the token question.
+For an Other stack, say in one line that it needs an AI that can read
+files whole (Claude, or an editor agent) and offer the closest zip above.
+Everything else in this step is for every other AI.
+
 The code for every stack is finished. Fetch RAW these three
 - nothing else:
 1. My stack's files, all in one text file - each file starts with a
