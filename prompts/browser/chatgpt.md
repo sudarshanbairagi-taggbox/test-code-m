@@ -20,7 +20,10 @@ curl -sSLo llms.txt "$BASE/llms.txt"
 1. Open https://chatgpt.com and start a **new chat**.
 2. Click the **+** (paperclip) button next to the message box, choose
    **Upload from computer**, and pick `llms.txt`.
-3. Paste the prompt from step 3 and send.
+3. Click **+** again and choose **Canvas**. ChatGPT only draws an HTML page
+   inside a canvas; in a normal chat it shows the file as code, so without
+   this you get no preview.
+4. Paste the prompt from step 3 and send.
 
 ChatGPT can sometimes fetch URLs itself, but attaching the file is more
 reliable than hoping it browses. If your plan has no file upload, paste the
@@ -29,7 +32,7 @@ button on each code block - never retype a file.
 
 ## 3. Paste this prompt
 
-Five lines. Paste the block as your first message with
+Six lines. Paste the block as your first message with
 llms.txt attached (or its contents pasted underneath). The detailed rules live
 in llms.txt; the AI reads them there.
 
@@ -40,7 +43,21 @@ Brief: BASE/guides/widget-build-brief.md - fetch it RAW and the two specs it lin
 Give me BOTH languages: a single self-contained index.php (PHP 8, nothing to install) AND the Node.js set (server.js, package.json, cache file) - plus a preview.html - the same page as a static file with the sample posts baked into the HTML, calling nothing, so I can double-click it and see the design before I have a token - and one README.md covering them. Token comes from the ACCESS_TOKEN env var - write the code first, then ask me for it at the end.
 Give me the complete code first, then tell me how to run it as if I've never used a terminal.
 You can't access my computer, so output every file complete and ready to save, starting each with "### FILE: <name>", then a setup checklist.
+Put preview.html in its own canvas so I can click Preview and see the design here; give the other files as normal code blocks.
 ```
+
+## See the design in the chat
+
+When `preview.html` opens in a canvas, click **Preview** at the top right of
+the canvas to see the page. If it came as a plain code block instead, reply:
+"Open preview.html in a canvas." Images can show blurred or missing inside
+the canvas; for the real look, save the file (step 4) and double-click it.
+
+Want to browse the themes first? Open
+https://raw.githack.com/sudarshanbairagi-taggbox/test-code-m/main/guides/theme-gallery.html
+in your browser. Do not ask ChatGPT to copy the gallery or a
+`guides/previews/` file back to you: they are 60-125 KB each, too long for
+one ChatGPT reply, so they come out cut short and will not render.
 
 ## 4. Save the files it gives you
 
@@ -136,6 +153,9 @@ which.
 - **The AI asked questions instead of writing code** - your prompt (or a
   follow-up) asked before writing anything. Reply: "Build it now with the
   defaults in the prompt, and ask me for the credentials at the end."
+- **No preview in the chat, only code** - Canvas was not on. Reply: "Open
+  preview.html in a canvas", then click **Preview**. Or save `preview.html`
+  and double-click it.
 - **`Taggbox API error: 401`** - token missing or wrong in the environment
   variable, or the API is switched off for the account.
 - **`422 Validation Failed`** - a query parameter is wrong; the response's
