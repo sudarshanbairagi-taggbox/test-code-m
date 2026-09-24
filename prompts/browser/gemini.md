@@ -133,8 +133,45 @@ You should see `"status":true` and one post inside `body.posts`. A 401 means
 the token is wrong or the API is disabled for the account; the message says
 which.
 
+## Step by step (Prompt 1 in Gemini)
+
+Prompt 1 in [guides/prompts.md](../../guides/prompts.md) does not work in
+Gemini as written: Gemini does not open raw GitHub files, so it replies
+"I cannot open the link" and stops. Attach the steps file instead - Gemini
+then follows it without opening anything, gives you links to the finished
+previews and code, and writes only two small files (`.env`, and
+`custom.css` if you change the look).
+
+1. Download [steps.md](../../prompts/library/build/steps.md)
+   (right-click, "Save link as...", keep the name `steps.md`), or in a terminal:
+
+   ```bash
+   BASE=https://raw.githubusercontent.com/sudarshanbairagi-taggbox/test-code-m/main   # change "main" to test another branch
+   curl -sSLo steps.md "$BASE/prompts/library/build/steps.md"
+   ```
+
+2. Open https://gemini.google.com, start a **new chat**, click **+** >
+   **Upload files** and pick `steps.md`. If Gemini refuses the file,
+   rename it `steps.txt`, or paste its contents under the prompt.
+3. Paste this prompt and send:
+
+```
+BASE = https://raw.githubusercontent.com/sudarshanbairagi-taggbox/test-code-m/main - every BASE/... link in the attached file starts from it.
+Build me a social widget from my Taggbox gallery, step by step.
+The attached steps.md lists every step and when to stop and wait for my answer - follow it exactly. You are Gemini: wherever it says "If you are ChatGPT or Gemini", do that. Open no link - only write links for me to click.
+Start with step 1 now.
+If steps.md is not attached, say so in one line - do not build from memory.
+```
+
+To test a branch, change `main` in the `BASE = ...` line and download
+steps.md from that branch.
+
 ## If it goes wrong
 
+- **"I cannot open the link ..."** - you pasted Prompt 1 from
+  guides/prompts.md without the file. Start a new chat with steps.md
+  attached and the prompt in
+  [Step by step (Prompt 1 in Gemini)](#step-by-step-prompt-1-in-gemini).
 - **The AI asked questions instead of writing code** - your prompt (or a
   follow-up) asked before writing anything. Reply: "Build it now with the
   defaults in the prompt, and ask me for the credentials at the end."

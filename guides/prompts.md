@@ -143,8 +143,13 @@ If you cannot open a link, say so in one line - do not build from memory.
 (e.g. `feat/check-code`). That line is the only place a branch is named, so
 every file the AI fetches after it comes from the same branch. The same goes
 for every prompt on this page. Prompt 1 is the one exception: its steps.md
-link is written out in full (some AIs, Gemini among them, open only a
-complete link), so change `main` there too.
+link is written out in full (some AIs open only a complete link), so change
+`main` there too.
+
+**Gemini:** it does not open raw GitHub files at all - with this prompt it
+replies "I cannot open the link" and stops. Attach steps.md instead and use
+the Gemini version of this prompt in
+[prompts/browser/gemini.md](../prompts/browser/gemini.md#step-by-step-prompt-1-in-gemini).
 
 ## Prompt A — the short alternative (AI that can browse)
 

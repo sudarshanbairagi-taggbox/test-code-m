@@ -35,6 +35,10 @@ want - "skip", or any reply that is not a number or name, means
 Only if this chat cannot show a preview: skip gallery.html and show
 me this table instead, then the same line and question.
 
+If you are ChatGPT or Gemini: fetch nothing in this step and skip
+gallery.html - you cannot open or read it whole from this chat. Show
+this table, then the same line and question.
+
 | # | Theme | For |
 |---|---|---|
 | 1 | Classic Card | social |
@@ -82,6 +86,12 @@ Then reply with only this:
   2. Which stack should I build it in? PHP / Node.js / React / Simple HTML /
      Other (name it - Laravel, WordPress, Next.js, Vue, Django, Flask...)
 
+If you are ChatGPT or Gemini: fetch nothing in this step and skip
+preview.html - you cannot open or read it whole from this chat. The slug never carries the
+number: 5 is square-photo, not 5-square-photo. Reply with only one
+line: open <link> to see the design with the sample posts (<link> built
+as above), then the same two questions.
+
 ## Step 3 - customise (optional, repeat as often as I ask)
 
 Do not redesign the preview. Every look is set by CSS variables, so a
@@ -106,10 +116,14 @@ Then ask: "Anything else to change, or which stack? (PHP / Node.js / React /
 Simple HTML / Other)"
 Fetch nothing. It ends when I name a stack.
 
+If you are ChatGPT or Gemini: skip item 1 (you have no preview.html in this chat)
+and give only item 2 - the change shows once the build runs.
+
 ## Step 4 - the files for my stack (fetch 3 files, write no new code - except Other)
 
-If you are ChatGPT: fetch nothing in this step - your browser tool cannot
-read these files whole, and the finished zip already exists. For PHP /
+If you are ChatGPT or Gemini: fetch nothing in this step - you cannot
+open or read these files whole from this chat, and the finished zip
+already exists. For PHP /
 Node.js / React / Simple HTML reply with only:
 - the download link BASE/templates/dist/social-widget-<php|nodejs|react|html>.zip
   - finished code, every theme, the sample posts and README.md;
