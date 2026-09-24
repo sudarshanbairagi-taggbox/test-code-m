@@ -148,48 +148,11 @@ You should see `"status":true` and one post inside `body.posts`. A 401 means
 the token is wrong or the API is disabled for the account; the message says
 which.
 
-## Step by step: pick a theme first
-
-The guided prompt in [guides/prompts.md](../../guides/prompts.md) (Prompt 1)
-stalls in ChatGPT: it asks for the theme, then nothing comes. It builds the
-preview link with the theme number in it (`previews/5-square-photo.html`
-instead of `previews/square-photo.html`), gets a 404 and stops. Even with
-the right link, that prompt asks it to copy a 60-80 KB file back character
-for character, which is more than ChatGPT writes in one reply. Use this
-prompt in ChatGPT instead. Everything is in the prompt, so ChatGPT fetches
-nothing. The previews and the code are already built; it only gives you links
-to them and writes two small files (`.env`, and `custom.css` if you change
-the look). Canvas is not needed for this one.
-
-```
-BASE = https://raw.githubusercontent.com/sudarshanbairagi-taggbox/test-code-m/main
-VIEW = BASE with "https://raw.githubusercontent.com/" swapped for "https://raw.githack.com/" (it opens pages in the browser; raw GitHub shows them as code).
-Build me a Taggbox social widget, step by step. Each step is ONE short reply, then stop and wait for my answer. Fetch nothing and write no code except the small files named below. No plan, no recap. Write every link in full.
-Step 1 - show this numbered list: 1 Classic Card, 2 Social Card, 3 Modern Card, 4 Classic Photo, 5 Square Photo, 6 Collage, 7 Vivid, 8 Horizontal Slider, 9 Horizontal Columns, 10 Slider, 11 Reels, 12 Story Theme, 13 Single Post, 14 Widget Theme (social); 15 Review Box, 16 Review Carousel, 17 Review List (reviews). Add one line: see them all at VIEW/guides/theme-gallery.html. Ask which one; "skip" or anything else means 3. The theme's slug is its name in lower case with dashes and NO number in front: 5 means square-photo, never 5-square-photo.
-Step 2 - give me only the link VIEW/guides/previews/<slug>.html with one line: open it to see the design with sample posts. Then ask: 1. Change anything (colours, font, columns, corners, spacing)? or "no". 2. Which stack: PHP / Node.js / React / Simple HTML?
-Step 3 (only if I ask for changes, repeat as often as I ask) - write custom.css: only a :root { } block with the variables that change, building on the earlier custom.css. Variables: --tbx-bg, --tbx-surface, --tbx-text, --tbx-author, --tbx-font, --tbx-weight, --tbx-size, --tbx-radius, --tbx-img-radius, --tbx-gap, --tbx-pad, --tbx-cols, --tbx-align, --tbx-lines. Then ask: anything else, or which stack?
-Step 4 - when I name a stack, give me:
-- the download link BASE/templates/dist/social-widget-<php|nodejs|react|html>.zip - finished code, all themes, sample posts and a README;
-- .env as a code block: ACCESS_TOKEN= (empty), API_BASE_URL=https://api.taggbox.com/api, WIDGET_THEME=<slug>;
-- the final custom.css, only if step 3 made one;
-- one line: unzip, put .env and custom.css in the unzipped folder; README.md has every step;
-- how to start: PHP / Simple HTML: php -S localhost:8080, open http://localhost:8080. Node.js: npm install, then npm start, open http://localhost:3000. React: npm install, then npm run dev, open http://localhost:5173;
-- one line: keep ACCESS_TOKEN only in .env on the server, never in frontend code or git.
-End by asking for my access token (Taggbox dashboard, the gallery's card, three-dot menu, "Access Token") and offer to put it in the .env.
-Start with step 1 now.
-```
-
-To test a branch, change `main` in the first line. It is the only place a
-branch is named.
-
 ## If it goes wrong
 
 - **The AI asked questions instead of writing code** - your prompt (or a
   follow-up) asked before writing anything. Reply: "Build it now with the
   defaults in the prompt, and ask me for the credentials at the end."
-- **It asks for the theme, then nothing** - you used Prompt 1 from
-  guides/prompts.md. Start a new chat with the prompt in
-  [Step by step: pick a theme first](#step-by-step-pick-a-theme-first).
 - **No preview in the chat, only code** - Canvas was not on. Reply: "Open
   preview.html in a canvas", then click **Preview**. Or save `preview.html`
   and double-click it.

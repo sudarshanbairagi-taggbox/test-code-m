@@ -135,14 +135,16 @@ BASE = https://raw.githubusercontent.com/sudarshanbairagi-taggbox/test-code-m/ma
 Build me a social widget from my Taggbox gallery, step by step.
 Fetch this RAW and follow it exactly - it lists every step and when
 to stop and wait for my answer. Start with step 1 now:
-BASE/prompts/library/build/steps.md
+https://raw.githubusercontent.com/sudarshanbairagi-taggbox/test-code-m/main/prompts/library/build/steps.md
 If you cannot open a link, say so in one line - do not build from memory.
 ```
 
 **Testing a branch:** change `main` in the `BASE = ...` line to your branch
 (e.g. `feat/check-code`). That line is the only place a branch is named, so
 every file the AI fetches after it comes from the same branch. The same goes
-for every prompt on this page.
+for every prompt on this page. Prompt 1 is the one exception: its steps.md
+link is written out in full (some AIs, Gemini among them, open only a
+complete link), so change `main` there too.
 
 ## Prompt A — the short alternative (AI that can browse)
 
