@@ -31,8 +31,6 @@ My theme ("skip" or anything that is not a number or name = 3, Modern Card):
 15. Review Box         BASE/guides/previews/review-box.html
 16. Review Carousel    BASE/guides/previews/review-carousel.html
 17. Review List        BASE/guides/previews/review-list.html
-18. Rating Badge       BASE/guides/previews/rating-badge.html
-19. Badge              BASE/guides/previews/badge.html
 
 Cannot open it? Say so in one line and stop - do not build one from
 memory.

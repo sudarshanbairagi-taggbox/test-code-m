@@ -53,15 +53,13 @@ me this table instead, then the same line and question.
 | 15 | Review Box | reviews |
 | 16 | Review Carousel | reviews |
 | 17 | Review List | reviews |
-| 18 | Rating Badge | reviews |
-| 19 | Badge | reviews |
 
 Then stop.
 
 ## Step 2 - the preview (fetch ONE file, write no code)
 
 Each theme's preview is a finished file. Its name (the "slug") is the
-theme name in lower case with dashes: 1 classic-card, 2 social-card, 3 modern-card, 4 classic-photo, 5 square-photo, 6 collage, 7 vivid, 8 horizontal-slider, 9 horizontal-columns, 10 slider, 11 reels, 12 story-theme, 13 single-post, 14 widget-theme, 15 review-box, 16 review-carousel, 17 review-list, 18 rating-badge, 19 badge.
+theme name in lower case with dashes: 1 classic-card, 2 social-card, 3 modern-card, 4 classic-photo, 5 square-photo, 6 collage, 7 vivid, 8 horizontal-slider, 9 horizontal-columns, 10 slider, 11 reels, 12 story-theme, 13 single-post, 14 widget-theme, 15 review-box, 16 review-carousel, 17 review-list.
 
 Fetch RAW BASE/guides/previews/<slug>.html and give it back to me as
 preview.html, exactly as it is, character for character - same CSS,
@@ -124,7 +122,7 @@ character. Do not rewrite, shorten, "improve" or merge any of them, and
 write no "rest stays the same". The files, in this order:
 - every file from the stack text file, except .env.example and
   except the sample file I do not need: samples/social.json for a
-  social theme, samples/reviews.json for a review theme (15-19) - give
+  social theme, samples/reviews.json for a review theme (15-17) - give
   only that one;
 - themes/<slug>.css and themes/<slug>.json (keep the themes/ folder);
 - custom.css, only if step 3 made one - the final version, with every

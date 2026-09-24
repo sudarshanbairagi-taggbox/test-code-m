@@ -75,8 +75,6 @@ GALLERY = {
     "Review Box": (79, "reviews", "a grid of review cards, stars on top"),
     "Review Carousel": (80, "reviews", "one row of review cards, arrows on the ends"),
     "Review List": (85, "reviews", "full-width review rows stacked down the page"),
-    "Rating Badge": (82, "reviews", "a small badge: logo, average score, stars, count"),
-    "Badge": (84, "reviews", "a wide badge: network logos, score and stars in one line"),
 }
 
 GALLERY_PAGE = """<!DOCTYPE html>
@@ -98,7 +96,6 @@ GALLERY_PAGE = """<!DOCTYPE html>
   .t i { display: block; aspect-ratio: 971 / 701; border-radius: 6px; overflow: hidden;
     background: #fff url(SPRITE) 0 0 / 100% FRAMES% no-repeat; }
   .t img { display: block; width: 100%; height: 100%; object-fit: contain; background: #fff; }
-  .t span { font-size: .85em; opacity: .7; }
 </style>
 </head>
 <body>
@@ -144,12 +141,12 @@ def build_gallery():
     """guides/theme-gallery.html: every theme's thumbnail with its number, for step 1."""
     tiles = []
     n = len(GALLERY)
-    for i, (name, (tid, kind, desc)) in enumerate(GALLERY.items(), 1):
+    for i, (name, (tid, *_)) in enumerate(GALLERY.items(), 1):
         slug = THEMES[name][0]
         pos = f"{(i - 1) * 100 / (n - 1):.4g}%"
         tiles.append(f'  <a class="t" href="previews/{slug}.html"><i style="background-position:0 {pos}">'
                      f'<img src="themes/bigThumb{tid}.png" alt="" loading="lazy" onerror="this.remove()"></i>'
-                     f'<b>{i}. {esc(name)}</b><span>{kind} - {esc(desc)}</span></a>')
+                     f'<b>{i}. {esc(name)}</b></a>')
     page = (GALLERY_PAGE.replace("SPRITE", gallery_sprite([v[0] for v in GALLERY.values()]))
             .replace("FRAMES", str(n * 100)).replace("TILES", "\n".join(tiles)))
     (ROOT / "guides/theme-gallery.html").write_text(page)
