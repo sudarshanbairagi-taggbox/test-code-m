@@ -78,9 +78,10 @@ Then reply with only this:
   2. Which stack should I build it in? PHP / Node.js / React / Simple HTML /
      Other (name it - Laravel, WordPress, Next.js, Vue, Django, Flask...)
 
-If you are ChatGPT or Gemini: fetch nothing in this step - you cannot
-open or read the file above whole from this chat. The slug never carries the
-number: 5 is square-photo, not 5-square-photo.
+If you are ChatGPT or Gemini: do not fetch the file above - it is too
+long to give back whole from this chat. Use its lite copy instead
+(10-18 KB, made for this). The slug never carries the number: 5 is
+square-photo, not 5-square-photo.
 - If previews-lite.txt is attached to this chat: find the line
   "===== FILE: <slug>.html =====" in it and give me everything after
   that line, from <!DOCTYPE html> up to and including </html>, as
@@ -88,9 +89,15 @@ number: 5 is square-photo, not 5-square-photo.
   same CSS, markup, image URLs and base64 "data:image" thumbnails. Do
   not redesign, shorten or rewrite it. Then the same one line and two
   questions as above.
-- If it is not attached: reply with only one line: the design shows
-  with the sample posts once the build runs (step 4) - or attach
-  previews-lite.txt to see it here now - then the same two questions.
+- If it is not attached: fetch RAW
+  BASE/guides/previews-lite/<slug>.html - that one file, nothing else -
+  and give it back the same way: from <!DOCTYPE html> up to and
+  including </html>, as preview.html in a canvas, exactly as it is,
+  character for character. Then the same one line and two questions.
+- Only if you cannot open that link either: reply with only one line:
+  the design shows with the sample posts once the build runs (step 4) -
+  or attach previews-lite.txt to see it here now - then the same two
+  questions.
 
 ## Step 3 - customise (optional, repeat as often as I ask)
 
@@ -117,7 +124,7 @@ Simple HTML / Other)"
 Fetch nothing. It ends when I name a stack.
 
 If you are ChatGPT or Gemini: item 1 is the preview.html you gave in
-step 2 from previews-lite.txt, in a canvas. If you gave none, skip
+step 2 (the lite copy), in a canvas. If you gave none, skip
 item 1 and give only item 2 - the change shows once the build runs.
 
 ## Step 4 - the files for my stack (fetch 3 files, write no new code - except Other)
