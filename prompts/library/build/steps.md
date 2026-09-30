@@ -32,9 +32,22 @@ want - "skip", or any reply that is not a number or name, means
 Only if this chat cannot show a preview: skip gallery.html and show
 me this table instead, then the same question.
 
-If you are ChatGPT or Gemini: fetch nothing in this step and skip
-gallery.html - you cannot open or read it whole from this chat. Show
-this table, then the same question.
+If you are ChatGPT or Gemini: do not fetch the gallery above - it is
+too long to give back whole from this chat. Use its lite copy instead
+(17 KB, made for this):
+- If previews-lite.txt is attached to this chat: find the line
+  "===== FILE: gallery.html =====" in it and give me everything after
+  that line, from <!DOCTYPE html> up to and including </html>, as
+  gallery.html in a canvas, exactly as it is, character for character -
+  same CSS, markup, links and base64 "data:image" picture. Do not
+  redesign, shorten or rewrite it. Then the same question.
+- If it is not attached: open this link, as it is written - that one
+  file, nothing else - and give it back the same way, as gallery.html
+  in a canvas, exactly as it is, character for character. Then the
+  same question.
+  https://raw.githubusercontent.com/sudarshanbairagi-taggbox/test-code-m/build/guides/theme-gallery-lite.html
+- Only if you cannot open that link either: show this table, then the
+  same question.
 
 | # | Theme | For |
 |---|---|---|
