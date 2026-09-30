@@ -32,28 +32,37 @@ want - "skip", or any reply that is not a number or name, means
 Only if this chat cannot show a preview: skip gallery.html and show
 me this table instead, then the same question.
 
-If you are ChatGPT or Gemini: do not fetch the gallery above - it is
-too long to give back whole from this chat. Use its lite copy instead
-(5 KB, made for this). Open links only with your web browsing tool -
-never with Python, curl or other code: that sandbox has no internet. Give the
-file back only in your reply, as one ```html code block - not saved to
-/mnt/data or any other file, not a download - so this chat shows it
-with its Preview button or in a canvas.
+If you are ChatGPT or Gemini: do not fetch or copy the gallery above -
+you cannot read its exact source from this chat: your browsing tool
+changes it, and your Python sandbox has no internet (never fetch with
+Python, curl or other code).
 - If previews-lite.txt is attached to this chat: find the line
   "===== FILE: gallery.html =====" in it and give me everything after
   that line, from <!DOCTYPE html> up to and including </html>, as
-  gallery.html, exactly as it is, character for character - same CSS,
-  markup, links and base64 "data:image" picture. Do not redesign,
-  shorten or rewrite it.
-- If it is not attached: open this link, as it is written - that one
-  file, nothing else - and give it back the same way, as gallery.html:
-  https://raw.githubusercontent.com/sudarshanbairagi-taggbox/test-code-m/build/guides/theme-gallery-lite.html
-- Only if you cannot open that link, or cannot give it back whole and
-  exactly: show this table instead. Never stop here - the "do not build
-  from memory" rule in my prompt is about this steps file only.
-Then, in every case, one line: see every theme in full size in your
-browser: https://raw.githack.com/sudarshanbairagi-taggbox/test-code-m/build/guides/theme-gallery.html
-- then the same question.
+  gallery.html in one ```html code block in your reply - not a file in /mnt/data, not
+  a download - so this chat shows it with its Preview button or in a
+  canvas - exactly as it is,
+  character for character. Do not redesign, shorten or rewrite it.
+- Otherwise: write this small page yourself as gallery.html,
+  in one ```html code block in your reply - not a file in /mnt/data, not
+  a download - so this chat shows it with its Preview button or in a
+  canvas. It is not a copy of anything - it shows
+  the real gallery from GitHub Pages:
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="utf-8"><title>Social Widget - themes</title>
+<style>html,body{margin:0;height:100%}iframe{display:block;border:0;width:100%;height:100vh}</style></head>
+<body><iframe src="https://sudarshanbairagi-taggbox.github.io/test-code-m/guides/theme-gallery.html"></iframe></body>
+</html>
+```
+
+Then one line: if the preview stays blank, open the gallery in your
+browser: https://sudarshanbairagi-taggbox.github.io/test-code-m/guides/theme-gallery.html
+- then the same question. Show the table below only if you gave no
+gallery.html. Never stop here - the "do not build from memory" rule
+in my prompt is about this steps file only.
 
 | # | Theme | For |
 |---|---|---|
@@ -97,46 +106,36 @@ Then reply with only this:
   2. Which stack should I build it in? PHP / Node.js / React / Simple HTML /
      Other (name it - Laravel, WordPress, Next.js, Vue, Django, Flask...)
 
-If you are ChatGPT or Gemini: do not fetch the file above - it is too
-long to give back whole from this chat. Use its lite copy instead
-(7-12 KB, made for this). The slug never carries the number: 5 is
-square-photo, not 5-square-photo. Open links only with your web browsing tool - never with
-Python, curl or other code: that sandbox has no internet. Give the
-file back only in your reply, as one ```html code block - not saved to
-/mnt/data or any other file, not a download - so this chat shows it
-with its Preview button or in a canvas.
+If you are ChatGPT or Gemini: do not fetch or copy the file above -
+you cannot read its exact source from this chat: your browsing tool
+changes it, and your Python sandbox has no internet (never fetch with
+Python, curl or other code). The slug never carries the number: 5 is square-photo,
+not 5-square-photo.
 - If previews-lite.txt is attached to this chat: find the line
   "===== FILE: <slug>.html =====" in it and give me everything after
   that line, from <!DOCTYPE html> up to and including </html>, as
-  preview.html, exactly as it is, character for character - same CSS,
-  markup, image URLs and base64 "data:image" thumbnails. Do not
-  redesign, shorten or rewrite it.
-- If it is not attached: open the link for my theme below, as it is
-  written - that one file, nothing else - and give it back the same
-  way, as preview.html:
-  1. https://raw.githubusercontent.com/sudarshanbairagi-taggbox/test-code-m/build/guides/previews-lite/classic-card.html
-  2. https://raw.githubusercontent.com/sudarshanbairagi-taggbox/test-code-m/build/guides/previews-lite/social-card.html
-  3. https://raw.githubusercontent.com/sudarshanbairagi-taggbox/test-code-m/build/guides/previews-lite/modern-card.html
-  4. https://raw.githubusercontent.com/sudarshanbairagi-taggbox/test-code-m/build/guides/previews-lite/classic-photo.html
-  5. https://raw.githubusercontent.com/sudarshanbairagi-taggbox/test-code-m/build/guides/previews-lite/square-photo.html
-  6. https://raw.githubusercontent.com/sudarshanbairagi-taggbox/test-code-m/build/guides/previews-lite/collage.html
-  7. https://raw.githubusercontent.com/sudarshanbairagi-taggbox/test-code-m/build/guides/previews-lite/vivid.html
-  8. https://raw.githubusercontent.com/sudarshanbairagi-taggbox/test-code-m/build/guides/previews-lite/horizontal-slider.html
-  9. https://raw.githubusercontent.com/sudarshanbairagi-taggbox/test-code-m/build/guides/previews-lite/horizontal-columns.html
-  10. https://raw.githubusercontent.com/sudarshanbairagi-taggbox/test-code-m/build/guides/previews-lite/slider.html
-  11. https://raw.githubusercontent.com/sudarshanbairagi-taggbox/test-code-m/build/guides/previews-lite/reels.html
-  12. https://raw.githubusercontent.com/sudarshanbairagi-taggbox/test-code-m/build/guides/previews-lite/story-theme.html
-  13. https://raw.githubusercontent.com/sudarshanbairagi-taggbox/test-code-m/build/guides/previews-lite/single-post.html
-  14. https://raw.githubusercontent.com/sudarshanbairagi-taggbox/test-code-m/build/guides/previews-lite/widget-theme.html
-  15. https://raw.githubusercontent.com/sudarshanbairagi-taggbox/test-code-m/build/guides/previews-lite/review-box.html
-  16. https://raw.githubusercontent.com/sudarshanbairagi-taggbox/test-code-m/build/guides/previews-lite/review-carousel.html
-  17. https://raw.githubusercontent.com/sudarshanbairagi-taggbox/test-code-m/build/guides/previews-lite/review-list.html
-- Only if you cannot open that link, or cannot give it back whole and
-  exactly: give no preview.html. Never stop here.
-Then, in every case, reply with only this: one line - see it in full
-size, with the real images, in your browser:
-https://raw.githack.com/sudarshanbairagi-taggbox/test-code-m/build/guides/previews/<slug>.html
-- then the same two questions as above.
+  preview.html in one ```html code block in your reply - not a file in /mnt/data, not
+  a download - so this chat shows it with its Preview button or in a
+  canvas - exactly as it is,
+  character for character. Do not redesign, shorten or rewrite it.
+- Otherwise: write this small page yourself as preview.html, with my
+  theme's slug in place of <slug>, in one ```html code block in your reply - not a file in /mnt/data, not
+  a download - so this chat shows it with its Preview button or in a
+  canvas. It
+  shows the real preview, with the sample posts, from GitHub Pages:
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="utf-8"><title>Social Widget - preview</title>
+<style>html,body{margin:0;height:100%}iframe{display:block;border:0;width:100%;height:100vh}</style></head>
+<body><iframe src="https://sudarshanbairagi-taggbox.github.io/test-code-m/guides/previews/<slug>.html"></iframe></body>
+</html>
+```
+
+Then reply with only this: one line - if the preview stays blank, open
+it in your browser: https://sudarshanbairagi-taggbox.github.io/test-code-m/guides/previews/<slug>.html
+- then the same two questions as above. Never stop here.
 
 ## Step 3 - customise (optional, repeat as often as I ask)
 
@@ -162,9 +161,11 @@ Then ask: "Anything else to change, or which stack? (PHP / Node.js / React /
 Simple HTML / Other)"
 Fetch nothing. It ends when I name a stack.
 
-If you are ChatGPT or Gemini: item 1 is the preview.html you gave in
-step 2 (the lite copy), as one ```html code block. If you gave none, skip
-item 1 and give only item 2 - the change shows once the build runs.
+If you are ChatGPT or Gemini: if your step 2 preview.html came from
+previews-lite.txt, item 1 is that file with custom.css pasted in, as
+said, in one ```html code block. If it was the small GitHub Pages page,
+or you gave none, skip item 1 and give only item 2 - the change shows
+once the build runs.
 
 ## Step 4 - the files for my stack (fetch 3 files, write no new code - except Other)
 

@@ -53,11 +53,14 @@ the canvas to see the page. If it came as a plain code block instead, reply:
 "Open preview.html in a canvas." Images can show blurred or missing inside
 the canvas; for the real look, save the file (step 4) and double-click it.
 
-Do not ask ChatGPT to copy the gallery or a
-`guides/previews/` file back to you: they are 60-125 KB each, too long for
-one ChatGPT reply, so they come out cut short and will not render. The
-lite gallery `guides/theme-gallery-lite.html` (5 KB) and the lite previews
-in `guides/previews-lite/` (7-12 KB) are made for this - see
+Do not ask ChatGPT to copy the gallery or a `guides/previews/` file back
+to you: it cannot read a linked file's exact source (its browsing tool
+changes it, and its Python sandbox has no internet). With only the link,
+steps.md has it write a small page that shows the real gallery or preview
+from GitHub Pages
+(https://sudarshanbairagi-taggbox.github.io/test-code-m/guides/theme-gallery.html);
+if that stays blank, open the link it gives in your browser. To copy the
+lite files into the canvas instead, attach them - see
 [Step by step (Prompt 1 in ChatGPT)](#step-by-step-prompt-1-in-chatgpt).
 
 ## Step by step (Prompt 1 in ChatGPT)
