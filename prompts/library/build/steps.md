@@ -76,8 +76,9 @@ fetch(u).then(function (r) { if (!r.ok) throw r.status; return r.text(); })
 </html>
 ```
 
-Then one line: if the preview asks for network access, click Allow -
-it loads the gallery from GitHub Pages; if it stays blank, open the
+Then one line: if the box shows code, click ▶ (Play) at its top right to
+see the gallery; if it asks for network access, click Allow - it loads
+the gallery from GitHub Pages; if it stays blank, open the
 gallery in your browser: https://sudarshanbairagi-taggbox.github.io/test-code-m/guides/theme-gallery.html
 - then the same question. Show the table below only if you gave no
 gallery.html. Never stop here - the "do not build from memory" rule
@@ -153,8 +154,9 @@ Step 4, a stack: open no link, never refuse. Give https://raw.githubusercontent.
 </html>
 ```
 
-2. One line: if the preview asks for network access, click Allow; if
-   it stays blank, open it in your browser: https://sudarshanbairagi-taggbox.github.io/test-code-m/guides/previews/<slug>.html
+2. One line: if the box shows code, click ▶ (Play) at its top right to
+   see the preview; if it asks for network access, click Allow; if it
+   stays blank, open it in your browser: https://sudarshanbairagi-taggbox.github.io/test-code-m/guides/previews/<slug>.html
 3. These two questions, word for word - the first one reminds you how
    to do step 3, as files fetched earlier may be gone from your view:
   1. Want to change anything? (colours, font, columns, corners,

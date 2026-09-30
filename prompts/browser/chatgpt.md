@@ -48,8 +48,9 @@ Put preview.html in its own canvas so I can click Preview and see the design her
 
 ## See the design in the chat
 
-When `preview.html` opens in a canvas, click **Preview** at the top right of
-the canvas to see the page. If it came as a plain code block instead, reply:
+When `preview.html` comes as an HTML box showing code, click **▶ (Play)** at
+its top right to see the page - ChatGPT decides by itself whether the box
+opens on the code or the preview, so this click is sometimes needed. If it came as a plain code block instead, reply:
 "Open preview.html in a canvas." Images can show blurred or missing inside
 the canvas; for the real look, save the file (step 4) and double-click it.
 
