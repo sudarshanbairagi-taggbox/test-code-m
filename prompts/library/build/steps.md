@@ -89,11 +89,28 @@ square-photo, not 5-square-photo.
   same CSS, markup, image URLs and base64 "data:image" thumbnails. Do
   not redesign, shorten or rewrite it. Then the same one line and two
   questions as above.
-- If it is not attached: fetch RAW
-  BASE/guides/previews-lite/<slug>.html - that one file, nothing else -
-  and give it back the same way: from <!DOCTYPE html> up to and
-  including </html>, as preview.html in a canvas, exactly as it is,
-  character for character. Then the same one line and two questions.
+- If it is not attached: open the link for my theme below, as it is
+  written - that one file, nothing else - and give it back the same
+  way: from <!DOCTYPE html> up to and including </html>, as
+  preview.html in a canvas, exactly as it is, character for character.
+  Then the same one line and two questions.
+  1. https://raw.githubusercontent.com/sudarshanbairagi-taggbox/test-code-m/build/guides/previews-lite/classic-card.html
+  2. https://raw.githubusercontent.com/sudarshanbairagi-taggbox/test-code-m/build/guides/previews-lite/social-card.html
+  3. https://raw.githubusercontent.com/sudarshanbairagi-taggbox/test-code-m/build/guides/previews-lite/modern-card.html
+  4. https://raw.githubusercontent.com/sudarshanbairagi-taggbox/test-code-m/build/guides/previews-lite/classic-photo.html
+  5. https://raw.githubusercontent.com/sudarshanbairagi-taggbox/test-code-m/build/guides/previews-lite/square-photo.html
+  6. https://raw.githubusercontent.com/sudarshanbairagi-taggbox/test-code-m/build/guides/previews-lite/collage.html
+  7. https://raw.githubusercontent.com/sudarshanbairagi-taggbox/test-code-m/build/guides/previews-lite/vivid.html
+  8. https://raw.githubusercontent.com/sudarshanbairagi-taggbox/test-code-m/build/guides/previews-lite/horizontal-slider.html
+  9. https://raw.githubusercontent.com/sudarshanbairagi-taggbox/test-code-m/build/guides/previews-lite/horizontal-columns.html
+  10. https://raw.githubusercontent.com/sudarshanbairagi-taggbox/test-code-m/build/guides/previews-lite/slider.html
+  11. https://raw.githubusercontent.com/sudarshanbairagi-taggbox/test-code-m/build/guides/previews-lite/reels.html
+  12. https://raw.githubusercontent.com/sudarshanbairagi-taggbox/test-code-m/build/guides/previews-lite/story-theme.html
+  13. https://raw.githubusercontent.com/sudarshanbairagi-taggbox/test-code-m/build/guides/previews-lite/single-post.html
+  14. https://raw.githubusercontent.com/sudarshanbairagi-taggbox/test-code-m/build/guides/previews-lite/widget-theme.html
+  15. https://raw.githubusercontent.com/sudarshanbairagi-taggbox/test-code-m/build/guides/previews-lite/review-box.html
+  16. https://raw.githubusercontent.com/sudarshanbairagi-taggbox/test-code-m/build/guides/previews-lite/review-carousel.html
+  17. https://raw.githubusercontent.com/sudarshanbairagi-taggbox/test-code-m/build/guides/previews-lite/review-list.html
 - Only if you cannot open that link either: reply with only one line:
   the design shows with the sample posts once the build runs (step 4) -
   or attach previews-lite.txt to see it here now - then the same two
