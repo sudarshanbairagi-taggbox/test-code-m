@@ -58,8 +58,9 @@ Python, curl or other code).
 </html>
 ```
 
-Then one line: if the preview stays blank, open the gallery in your
-browser: https://sudarshanbairagi-taggbox.github.io/test-code-m/guides/theme-gallery.html
+Then one line: if the preview asks for network access, click Allow -
+it loads the gallery from GitHub Pages; if it stays blank, open the
+gallery in your browser: https://sudarshanbairagi-taggbox.github.io/test-code-m/guides/theme-gallery.html
 - then the same question. Show the table below only if you gave no
 gallery.html. Never stop here - the "do not build from memory" rule
 in my prompt is about this steps file only.
@@ -133,8 +134,8 @@ not 5-square-photo.
 </html>
 ```
 
-Then reply with only this: one line - if the preview stays blank, open
-it in your browser: https://sudarshanbairagi-taggbox.github.io/test-code-m/guides/previews/<slug>.html
+Then reply with only this: one line - if the preview asks for network
+access, click Allow; if it stays blank, open it in your browser: https://sudarshanbairagi-taggbox.github.io/test-code-m/guides/previews/<slug>.html
 - then the same two questions as above. Never stop here.
 
 ## Step 3 - customise (optional, repeat as often as I ask)

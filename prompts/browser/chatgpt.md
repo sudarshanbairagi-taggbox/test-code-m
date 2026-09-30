@@ -59,7 +59,10 @@ changes it, and its Python sandbox has no internet). With only the link,
 steps.md has it write a small page that shows the real gallery or preview
 from GitHub Pages
 (https://sudarshanbairagi-taggbox.github.io/test-code-m/guides/theme-gallery.html);
-if that stays blank, open the link it gives in your browser. To copy the
+when the preview asks "Allow network access?" for
+sudarshanbairagi-taggbox.github.io, click **Allow** - that is ChatGPT's own
+check before a preview loads another site. If it stays blank, open the
+link it gives in your browser. To copy the
 lite files into the canvas instead, attach them - see
 [Step by step (Prompt 1 in ChatGPT)](#step-by-step-prompt-1-in-chatgpt).
 
