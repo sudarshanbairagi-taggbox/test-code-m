@@ -1,9 +1,9 @@
 # Taggbox social widget - project context
 
-BASE = https://raw.githubusercontent.com/sudarshanbairagi-taggbox/test-code-m/main - every BASE/<path> below is a file in that repo (change "main" to use another branch).
+BASE = https://raw.githubusercontent.com/wallapi/taggbox.com-API-Docs/build - every BASE/<path> below is a file in that repo (change "main" to use another branch).
 
 Data source: GET {API_BASE_URL}/v3/posts
-API docs: https://github.com/sudarshanbairagi-taggbox/test-code-m
+API docs: https://github.com/wallapi/taggbox.com-API-Docs
 API spec: BASE/llms.txt
 (a local llms.txt copy is in this folder) - follow it exactly for endpoints,
 field names and the response envelope ({ status, message, code, body }).

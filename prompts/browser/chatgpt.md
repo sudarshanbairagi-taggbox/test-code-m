@@ -11,7 +11,7 @@ Download [llms.txt](../../llms.txt) to your computer
 terminal:
 
 ```bash
-BASE=https://raw.githubusercontent.com/sudarshanbairagi-taggbox/test-code-m/main   # change "main" to test another branch
+BASE=https://raw.githubusercontent.com/wallapi/taggbox.com-API-Docs/build   # change "main" to test another branch
 curl -sSLo llms.txt "$BASE/llms.txt"
 ```
 
@@ -37,7 +37,7 @@ llms.txt attached (or its contents pasted underneath). The detailed rules live
 in llms.txt; the AI reads them there.
 
 ```
-BASE = https://raw.githubusercontent.com/sudarshanbairagi-taggbox/test-code-m/main - every BASE/... link, here and in the files you fetch, starts from it.
+BASE = https://raw.githubusercontent.com/wallapi/taggbox.com-API-Docs/build - every BASE/... link, here and in the files you fetch, starts from it.
 Build me a social widget: one web page that shows the live posts from my Taggbox gallery.
 Brief: BASE/guides/widget-build-brief.md - fetch it RAW and the two specs it links (the API spec and the design spec); if you cannot fetch URLs, follow the attached llms.txt.
 Give me BOTH languages: a single self-contained index.php (PHP 8, nothing to install) AND the Node.js set (server.js, package.json, cache file) - plus a preview.html - the same page as a static file with the sample posts baked into the HTML, calling nothing, so I can double-click it and see the design before I have a token - and one README.md covering them. Token comes from the ACCESS_TOKEN env var - write the code first, then ask me for it at the end.
@@ -53,11 +53,46 @@ the canvas to see the page. If it came as a plain code block instead, reply:
 "Open preview.html in a canvas." Images can show blurred or missing inside
 the canvas; for the real look, save the file (step 4) and double-click it.
 
-Want to browse the themes first? Open
-https://raw.githack.com/sudarshanbairagi-taggbox/test-code-m/main/guides/theme-gallery.html
-in your browser. Do not ask ChatGPT to copy the gallery or a
+Do not ask ChatGPT to copy the gallery or a
 `guides/previews/` file back to you: they are 60-125 KB each, too long for
-one ChatGPT reply, so they come out cut short and will not render.
+one ChatGPT reply, so they come out cut short and will not render. The
+lite previews in `guides/previews-lite/` (10-18 KB) are made for this - see
+[Step by step (Prompt 1 in ChatGPT)](#step-by-step-prompt-1-in-chatgpt).
+
+## Step by step (Prompt 1 in ChatGPT)
+
+The guided build from Prompt 1 in [guides/prompts.md](../../guides/prompts.md):
+pick a theme, see it in a canvas, change the look, then get the finished
+code as a zip. ChatGPT does not reliably open raw GitHub files, so attach
+them instead.
+
+1. Download [steps.md](../../prompts/library/build/steps.md) and
+   [previews-lite.txt](../../guides/previews-lite.txt)
+   (right-click each, "Save link as...", keep the names), or in a terminal:
+
+   ```bash
+   BASE=https://raw.githubusercontent.com/wallapi/taggbox.com-API-Docs/build   # change "main" to test another branch
+   curl -sSLo steps.md "$BASE/prompts/library/build/steps.md"
+   curl -sSLo previews-lite.txt "$BASE/guides/previews-lite.txt"
+   ```
+
+2. Open https://chatgpt.com, start a **new chat**, click **+** >
+   **Upload from computer** and pick both files.
+3. Click **+** again and choose **Canvas**.
+4. Paste this prompt and send:
+
+```
+BASE = https://raw.githubusercontent.com/wallapi/taggbox.com-API-Docs/build - every BASE/... link in the attached file starts from it.
+Build me a social widget from my Taggbox gallery, step by step.
+The attached steps.md lists every step and when to stop and wait for my answer - follow it exactly. You are ChatGPT: wherever it says "If you are ChatGPT or Gemini", do that. previews-lite.txt is attached too. Open no link - only write links for me to click.
+Start with step 1 now.
+If steps.md is not attached, say so in one line - do not build from memory.
+```
+
+In step 2, click **Preview** at the top right of the canvas. Images can look
+soft there - the canvas may block outside images, and then a small built-in
+copy shows instead. For the sharp version, save preview.html and
+double-click it.
 
 ## 4. Save the files it gives you
 
@@ -156,6 +191,13 @@ which.
 - **No preview in the chat, only code** - Canvas was not on. Reply: "Open
   preview.html in a canvas", then click **Preview**. Or save `preview.html`
   and double-click it.
+- **Step by step: no preview in step 2, only a line of text** -
+  previews-lite.txt was not attached. Attach it and reply "Show the preview
+  now".
+- **The preview stops halfway or looks broken** - reply "Give preview.html
+  again from previews-lite.txt, whole and unchanged". Or download the
+  theme's file from [guides/previews-lite/](../../guides/previews-lite) and
+  double-click it.
 - **`Taggbox API error: 401`** - token missing or wrong in the environment
   variable, or the API is switched off for the account.
 - **`422 Validation Failed`** - a query parameter is wrong; the response's

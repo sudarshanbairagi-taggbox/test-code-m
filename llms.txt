@@ -15,7 +15,7 @@ together with your task, e.g.:
 Everything an integration needs is in this file; no other docs are required.
 Agents: fetch this file RAW (curl the URL you were given); a summarising fetch
 drops the field names, which are the one thing that cannot be guessed.
-Human-readable docs: https://github.com/sudarshanbairagi-taggbox/test-code-m
+Human-readable docs: https://github.com/wallapi/taggbox.com-API-Docs
 
 ## Facts
 
@@ -241,7 +241,7 @@ user's prompt is deliberately short; this section is the full brief.
     reviewed with nothing installed and no token in existence. Use the
     published sample posts when you can reach them:
     guides/sample-posts-social.json and guides/sample-posts-reviews.json in
-    github.com/sudarshanbairagi-taggbox/test-code-m, fetched raw; otherwise invent
+    github.com/wallapi/taggbox.com-API-Docs, fetched raw; otherwise invent
     8–12 posts in the same shape, including a review post with a `rating`
     and a text-only post with an empty `media` array.
 13. Hand-off: deliverable first, commentary last — do not open with a plan
