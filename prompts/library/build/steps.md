@@ -46,15 +46,27 @@ Python, curl or other code).
 - Otherwise: write this small page yourself as gallery.html,
   in one ```html code block in your reply - not a file in /mnt/data, not
   a download - so this chat shows it with its Preview button or in a
-  canvas. It is not a copy of anything - it shows
-  the real gallery from GitHub Pages:
+  canvas. It is not a copy of anything - it loads
+  the real gallery from GitHub Pages into this chat's preview:
 
 ```html
 <!DOCTYPE html>
 <html lang="en">
 <head><meta charset="utf-8"><title>Social Widget - themes</title>
-<style>html,body{margin:0;height:100%}iframe{display:block;border:0;width:100%;height:100vh}</style></head>
-<body><iframe src="https://sudarshanbairagi-taggbox.github.io/test-code-m/guides/theme-gallery.html"></iframe></body>
+<style id="c"></style></head>
+<body><p id="m" style="font:15px system-ui;padding:16px">Loading...</p>
+<script>
+var u = "https://sudarshanbairagi-taggbox.github.io/test-code-m/guides/theme-gallery.html";
+fetch(u).then(function (r) { if (!r.ok) throw r.status; return r.text(); })
+  .then(function (h) {
+    h = h.replace("</head>", document.getElementById("c").outerHTML + "</head>");
+    document.open(); document.write(h); document.close();
+  })
+  .catch(function () {
+    document.getElementById("m").innerHTML = 'Could not load it here - <a href="' + u + '" target="_blank">open it in your browser</a>.';
+  });
+</script>
+</body>
 </html>
 ```
 
@@ -123,14 +135,28 @@ not 5-square-photo.
   theme's slug in place of <slug>, in one ```html code block in your reply - not a file in /mnt/data, not
   a download - so this chat shows it with its Preview button or in a
   canvas. It
-  shows the real preview, with the sample posts, from GitHub Pages:
+  loads the real preview, with the sample posts, from GitHub Pages into
+  this chat's preview. Leave <style id="c"></style> empty - step 3
+  puts custom.css there:
 
 ```html
 <!DOCTYPE html>
 <html lang="en">
 <head><meta charset="utf-8"><title>Social Widget - preview</title>
-<style>html,body{margin:0;height:100%}iframe{display:block;border:0;width:100%;height:100vh}</style></head>
-<body><iframe src="https://sudarshanbairagi-taggbox.github.io/test-code-m/guides/previews/<slug>.html"></iframe></body>
+<style id="c"></style></head>
+<body><p id="m" style="font:15px system-ui;padding:16px">Loading...</p>
+<script>
+var u = "https://sudarshanbairagi-taggbox.github.io/test-code-m/guides/previews/<slug>.html";
+fetch(u).then(function (r) { if (!r.ok) throw r.status; return r.text(); })
+  .then(function (h) {
+    h = h.replace("</head>", document.getElementById("c").outerHTML + "</head>");
+    document.open(); document.write(h); document.close();
+  })
+  .catch(function () {
+    document.getElementById("m").innerHTML = 'Could not load it here - <a href="' + u + '" target="_blank">open it in your browser</a>.';
+  });
+</script>
+</body>
 </html>
 ```
 
@@ -162,11 +188,12 @@ Then ask: "Anything else to change, or which stack? (PHP / Node.js / React /
 Simple HTML / Other)"
 Fetch nothing. It ends when I name a stack.
 
-If you are ChatGPT or Gemini: if your step 2 preview.html came from
-previews-lite.txt, item 1 is that file with custom.css pasted in, as
-said, in one ```html code block. If it was the small GitHub Pages page,
-or you gave none, skip item 1 and give only item 2 - the change shows
-once the build runs.
+If you are ChatGPT or Gemini: item 1 is your step 2 preview.html again,
+in one ```html code block. If it came from previews-lite.txt, paste
+custom.css in as said. If it was the small GitHub Pages page, change
+only one thing: put the whole custom.css inside its
+<style id="c"></style> - the page adds it to the preview it loads. If
+you gave none, skip item 1 and give only item 2.
 
 ## Step 4 - the files for my stack (fetch 3 files, write no new code - except Other)
 
