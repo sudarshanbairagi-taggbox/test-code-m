@@ -3,7 +3,10 @@
 Links written BASE/<path> are files in this repo. BASE is the one my prompt gave; if it gave none, BASE is where you got this file: the URL up to and including the branch name, or the local repo folder.
 
 A short guided build. Each step is ONE reply, then you stop and wait
-for my answer. Keep every question short, as a numbered list I can
+for my answer. ChatGPT and Gemini: before every reply after step 1,
+open this steps file again (the same link as in my first message) and
+do the step it names - files you fetched earlier may be gone from your
+view. Keep every question short, as a numbered list I can
 answer with one number or word.
 
 Speed matters on every step. Everything is already built - the
@@ -151,9 +154,12 @@ fetch(u).then(function (r) { if (!r.ok) throw r.status; return r.text(); })
 
 2. One line: if the preview asks for network access, click Allow; if
    it stays blank, open it in your browser: https://sudarshanbairagi-taggbox.github.io/test-code-m/guides/previews/<slug>.html
-3. These two questions:
+3. These two questions, word for word - the first one reminds you how
+   to do step 3, as files fetched earlier may be gone from your view:
   1. Want to change anything? (colours, font, columns, corners,
-     spacing...) - or say "no".
+     spacing...) - or say "no". I'll show it right here: this
+     preview.html again with the change inside its <style id="c">,
+     plus custom.css to keep.
   2. Which stack should I build it in? PHP / Node.js / React / Simple HTML /
      Other (name it - Laravel, WordPress, Next.js, Vue, Django, Flask...)
 
@@ -207,8 +213,9 @@ out the first:
      </style>, under a /* custom.css */ comment.
 2. custom.css in one short code block, with one line: keep it - it
    goes into the build in step 4.
-3. Ask: "Anything else to change, or which stack? (PHP / Node.js /
-   React / Simple HTML / Other)"
+3. Ask, word for word: "Anything else to change? I'll show it here the
+   same way. Or which stack? (PHP / Node.js / React / Simple HTML /
+   Other)"
 
 ### Step 3 for every other AI
 
