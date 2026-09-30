@@ -21,7 +21,7 @@ changes; its part files say how that lands in each file.
 | [browser-preamble.md](browser-preamble.md) | Prompt 0 — browser-AI preamble | — |
 
 Raw URL of each: `BASE/prompts/library/<folder>/<file>`, where BASE is
-`https://raw.githubusercontent.com/wallapi/taggbox.com-API-Docs/<branch>`.
+`https://raw.githubusercontent.com/sudarshanbairagi-taggbox/test-code-m/<branch>`.
 
 No file here hardcodes a branch. Every link is written `BASE/<path>`, and BASE
 is set once, in the first line of the pasted prompt. To test a branch, change
