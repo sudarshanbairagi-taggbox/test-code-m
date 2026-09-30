@@ -9,8 +9,10 @@ one card template for all themes.
 
 guides/previews-lite/<theme>.html is the same page with smaller stand-in
 thumbnails and no CSS comments (~15 KB instead of ~80 KB), for ChatGPT and
-Gemini, and guides/theme-gallery-lite.html is the gallery with a smaller
-sprite (~14 KB); guides/previews-lite.txt holds all of them, to attach to the chat.
+Gemini, and guides/theme-gallery-lite.html is the gallery (~5 KB). The linked
+files carry no base64 stand-ins (ChatGPT's browsing tool cannot copy them back
+exactly); guides/previews-lite.txt holds all of them with the stand-ins and a
+small gallery sprite, to attach to the chat.
 
 It also writes templates/themes/<theme>.css + .json (the same CSS and card
 layout, read by the starter code), templates/samples/, and one zip per stack
@@ -40,7 +42,7 @@ SPRITE_QUALITY = 40
 LITE_OUT = ROOT / "guides" / "previews-lite"
 LITE_THUMB_WIDTH = 80
 LITE_THUMB_QUALITY = 40
-# Lite gallery (ChatGPT / Gemini, step 1): sprite px per thumbnail and WebP quality - ~14 KB page.
+# Lite gallery in previews-lite.txt (attached to ChatGPT / Gemini): sprite px and WebP quality.
 LITE_SPRITE_WIDTH = 72
 LITE_SPRITE_QUALITY = 30
 
@@ -124,7 +126,7 @@ TILES
 """
 
 
-def gallery_sprite(ids, width=SPRITE_WIDTH, quality=SPRITE_QUALITY, page="guides/theme-gallery.html"):
+def gallery_sprite(ids, width=SPRITE_WIDTH, quality=SPRITE_QUALITY):
     """Every thumbnail stacked in one small base64 WebP. The chat that shows the gallery (step 1)
     often blocks outside images, so this is all it shows - it must be sharp yet short, as the AI
     copies it character for character. The real PNGs load on top of it where they can."""
@@ -132,7 +134,7 @@ def gallery_sprite(ids, width=SPRITE_WIDTH, quality=SPRITE_QUALITY, page="guides
         import base64, io
         from PIL import Image, ImageFilter
     except ImportError:  # no Pillow: keep the sprite already in the page
-        old = (ROOT / page).read_text()
+        old = (ROOT / "guides/theme-gallery.html").read_text()
         return old.split("background: #fff url(", 1)[1].split(")", 1)[0]
     w = width
     h = round(w * 701 / 971)
@@ -152,8 +154,9 @@ def gallery_sprite(ids, width=SPRITE_WIDTH, quality=SPRITE_QUALITY, page="guides
 
 def build_gallery():
     """guides/theme-gallery.html: every theme's thumbnail with its number, for step 1.
-    guides/theme-gallery-lite.html is the same page with a much smaller sprite, for ChatGPT and
-    Gemini, which cannot copy the 125 KB page back whole. Returns the lite page."""
+    guides/theme-gallery-lite.html is the same page with no sprite (~5 KB), for ChatGPT, which
+    opens it with its browsing tool - that cannot hand back a long base64 line exactly. Returns
+    the page with a much smaller sprite, for previews-lite.txt."""
     tiles = []
     n = len(GALLERY)
     for i, (name, (tid, *_)) in enumerate(GALLERY.items(), 1):
@@ -165,10 +168,9 @@ def build_gallery():
     ids = [v[0] for v in GALLERY.values()]
     page = GALLERY_PAGE.replace("FRAMES", str(n * 100)).replace("TILES", "\n".join(tiles))
     (ROOT / "guides/theme-gallery.html").write_text(page.replace("SPRITE", gallery_sprite(ids)))
-    lite_page = page.replace("SPRITE", gallery_sprite(ids, LITE_SPRITE_WIDTH, LITE_SPRITE_QUALITY,
-                                                      "guides/theme-gallery-lite.html"))
-    (ROOT / "guides/theme-gallery-lite.html").write_text(lite_page)
-    return lite_page
+    (ROOT / "guides/theme-gallery-lite.html").write_text(
+        page.replace("url(SPRITE) 0 0 / 100% " + str(n * 100) + "% no-repeat", "linear-gradient(135deg, #e6e8f2, #f3e6ee)"))
+    return page.replace("SPRITE", gallery_sprite(ids, LITE_SPRITE_WIDTH, LITE_SPRITE_QUALITY))
 
 
 # Short brand marks for the network badge (no external icon files).
@@ -694,7 +696,9 @@ def main():
         theme = themes[name]
         posts = lite_reviews if theme["type"] == "review" else lite_social
         page = lite(build(name, theme["type"], theme["style"], posts), name)
-        (LITE_OUT / f"{slug}.html").write_text(page)
+        # The linked file drops the stand-ins: ChatGPT's browsing tool cannot hand back a long
+        # base64 line exactly. previews-lite.txt keeps them, for a canvas that blocks outside images.
+        (LITE_OUT / f"{slug}.html").write_text(re.sub(r"--tbx-ph:url\(data:image/[^)]*\);?", "", page))
         bundle.append(f"===== FILE: {slug}.html =====\n{page.rstrip()}\n")
     (ROOT / "guides/previews-lite.txt").write_text(
         "# Social Widget - the lite gallery and the lite preview of every theme, for ChatGPT and Gemini.\n"

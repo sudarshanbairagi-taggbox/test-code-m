@@ -34,8 +34,8 @@ me this table instead, then the same question.
 
 If you are ChatGPT or Gemini: do not fetch the gallery above - it is
 too long to give back whole from this chat. Use its lite copy instead
-(17 KB, made for this). Open links only with your web browsing tool - never with
-Python, curl or other code: that sandbox has no internet. Give the
+(5 KB, made for this). Open links only with your web browsing tool -
+never with Python, curl or other code: that sandbox has no internet. Give the
 file back only in your reply, as one ```html code block - not saved to
 /mnt/data or any other file, not a download - so this chat shows it
 with its Preview button or in a canvas.
@@ -48,7 +48,9 @@ with its Preview button or in a canvas.
 - If it is not attached: open this link, as it is written - that one
   file, nothing else - and give it back the same way, as gallery.html:
   https://raw.githubusercontent.com/sudarshanbairagi-taggbox/test-code-m/build/guides/theme-gallery-lite.html
-- Only if you cannot open that link either: show this table.
+- Only if you cannot open that link, or cannot give it back whole and
+  exactly: show this table instead. Never stop here - the "do not build
+  from memory" rule in my prompt is about this steps file only.
 Then, in every case, one line: see every theme in full size in your
 browser: https://raw.githack.com/sudarshanbairagi-taggbox/test-code-m/build/guides/theme-gallery.html
 - then the same question.
@@ -97,7 +99,7 @@ Then reply with only this:
 
 If you are ChatGPT or Gemini: do not fetch the file above - it is too
 long to give back whole from this chat. Use its lite copy instead
-(10-18 KB, made for this). The slug never carries the number: 5 is
+(7-12 KB, made for this). The slug never carries the number: 5 is
 square-photo, not 5-square-photo. Open links only with your web browsing tool - never with
 Python, curl or other code: that sandbox has no internet. Give the
 file back only in your reply, as one ```html code block - not saved to
@@ -129,7 +131,8 @@ with its Preview button or in a canvas.
   15. https://raw.githubusercontent.com/sudarshanbairagi-taggbox/test-code-m/build/guides/previews-lite/review-box.html
   16. https://raw.githubusercontent.com/sudarshanbairagi-taggbox/test-code-m/build/guides/previews-lite/review-carousel.html
   17. https://raw.githubusercontent.com/sudarshanbairagi-taggbox/test-code-m/build/guides/previews-lite/review-list.html
-- Only if you cannot open that link either: give no preview.html.
+- Only if you cannot open that link, or cannot give it back whole and
+  exactly: give no preview.html. Never stop here.
 Then, in every case, reply with only this: one line - see it in full
 size, with the real images, in your browser:
 https://raw.githack.com/sudarshanbairagi-taggbox/test-code-m/build/guides/previews/<slug>.html

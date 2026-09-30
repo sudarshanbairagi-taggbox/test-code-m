@@ -56,8 +56,8 @@ the canvas; for the real look, save the file (step 4) and double-click it.
 Do not ask ChatGPT to copy the gallery or a
 `guides/previews/` file back to you: they are 60-125 KB each, too long for
 one ChatGPT reply, so they come out cut short and will not render. The
-lite gallery `guides/theme-gallery-lite.html` (17 KB) and the lite previews
-in `guides/previews-lite/` (10-18 KB) are made for this - see
+lite gallery `guides/theme-gallery-lite.html` (5 KB) and the lite previews
+in `guides/previews-lite/` (7-12 KB) are made for this - see
 [Step by step (Prompt 1 in ChatGPT)](#step-by-step-prompt-1-in-chatgpt).
 
 ## Step by step (Prompt 1 in ChatGPT)
