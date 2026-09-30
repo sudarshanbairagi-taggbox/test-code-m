@@ -4,9 +4,11 @@ Links written BASE/<path> are files in this repo. BASE is the one my prompt gave
 
 A short guided build. Each step is ONE reply, then you stop and wait
 for my answer. ChatGPT and Gemini: before every reply after step 1,
-open this steps file again (the same link as in my first message) and
-do the step it names - files you fetched earlier may be gone from your
-view. Keep every question short, as a numbered list I can
+try to open this steps file again (the same link as in my first
+message) and do the step it names - files you fetched earlier may be
+gone from your view. If it does not open, carry on from what you know
+of it and never stop: the "do not build from memory" rule in my prompt
+is only for the first time you open this file. Keep every question short, as a numbered list I can
 answer with one number or word.
 
 Speed matters on every step. Everything is already built - the
@@ -162,6 +164,8 @@ fetch(u).then(function (r) { if (!r.ok) throw r.status; return r.text(); })
      plus custom.css to keep.
   2. Which stack should I build it in? PHP / Node.js / React / Simple HTML /
      Other (name it - Laravel, WordPress, Next.js, Vue, Django, Flask...)
+     I'll give the finished zip's download link, .env and custom.css -
+     nothing to fetch.
 
 Then stop. Never stop before giving all three.
 
@@ -215,7 +219,8 @@ out the first:
    goes into the build in step 4.
 3. Ask, word for word: "Anything else to change? I'll show it here the
    same way. Or which stack? (PHP / Node.js / React / Simple HTML /
-   Other)"
+   Other) - I'll give the finished zip's download link, .env and
+   custom.css."
 
 ### Step 3 for every other AI
 
@@ -231,11 +236,13 @@ Simple HTML / Other)"
 
 ## Step 4 - the files for my stack (fetch 3 files, write no new code - except Other)
 
-If you are ChatGPT or Gemini: fetch nothing in this step - you cannot
-open or read these files whole from this chat, and the finished zip
-already exists. For PHP /
+If you are ChatGPT or Gemini: fetch nothing in this step and open no
+link - not even this steps file; everything you need is here or in this
+chat. You cannot read these files whole from this chat, and the
+finished zip already exists. Never stop or refuse here. For PHP /
 Node.js / React / Simple HTML reply with only:
-- the download link BASE/templates/dist/social-widget-<php|nodejs|react|html>.zip
+- the download link, written in full:
+  https://raw.githubusercontent.com/sudarshanbairagi-taggbox/test-code-m/build/templates/dist/social-widget-<php|nodejs|react|html>.zip
   - finished code, every theme, the sample posts and README.md;
 - .env as a code block: ACCESS_TOKEN= (empty),
   API_BASE_URL=https://api.taggbox.com/api, WIDGET_THEME=<slug>;
